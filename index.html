@@ -258,6 +258,150 @@ canvas#propCanvas{background:radial-gradient(circle at 50% 45%,#101c3a 0%,#060b1
 .methodic-body{padding:0 16px 16px 58px;font-size:13px;color:var(--muted);line-height:1.65}
 .methodic-body b{color:var(--text)}
 
+
+/* ============ КОНСТРУКТОР БПЛА ============ */
+.lab-grid-builder{display:grid;grid-template-columns:390px 1fr 330px;gap:16px;align-items:start}
+@media(max-width:1220px){.lab-grid-builder{grid-template-columns:360px 1fr}}
+@media(max-width:900px){.lab-grid-builder{grid-template-columns:1fr}}
+.comp-grid{display:grid;grid-template-columns:1fr;gap:7px}
+.comp-card{
+  background:var(--bg);border:1.5px solid var(--line);border-radius:11px;padding:8px 11px;text-align:left;
+  transition:all .15s;color:var(--text);display:block
+}
+.comp-card:hover{border-color:var(--line2)}
+.comp-card.on{border-color:var(--orange);background:linear-gradient(180deg,rgba(255,138,42,.13),rgba(255,138,42,.03));box-shadow:0 4px 14px rgba(255,138,42,.15)}
+.comp-name{font-size:12px;font-weight:700}
+.comp-spec{font-size:10.5px;color:var(--muted);margin-top:2px;font-variant-numeric:tabular-nums}
+.builder-stage{display:flex;flex-direction:column;padding:0;overflow:hidden}
+svg#quadSvg{display:block;width:100%;max-width:360px;height:auto;margin:6px auto 0;background:radial-gradient(circle at 50% 45%,#0e1730,#060b18)}
+.prop-disc{animation:dashspin .55s linear infinite}
+.spin-ccw{animation-direction:reverse}
+@keyframes dashspin{to{stroke-dashoffset:-36}}
+.tw-gauge{padding:12px 18px 4px}
+.tw-head{display:flex;justify-content:space-between;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted2);margin-bottom:6px}
+.tw-head b{color:var(--cyan2);font-size:14px}
+.tw-track{position:relative;height:14px;border-radius:7px;background:var(--panel3);overflow:hidden}
+.tw-fill{height:100%;border-radius:7px;background:linear-gradient(90deg,#ff4d5e,#ff8a2a);width:30%;transition:width .25s}
+.tw-scale{display:flex;justify-content:space-between;font-size:9px;color:var(--muted2);margin:4px 2px 10px;font-variant-numeric:tabular-nums}
+.build-verdict{
+  display:flex;align-items:center;justify-content:center;gap:12px;margin:4px 18px 10px;
+  border-radius:12px;padding:13px;font-weight:900;letter-spacing:.12em;font-size:14px;text-transform:uppercase;
+  border:1px solid
+}
+.build-verdict.ok{background:rgba(47,224,140,.1);border-color:rgba(47,224,140,.5);color:var(--green)}
+.build-verdict.bad{background:rgba(255,77,94,.1);border-color:rgba(255,77,94,.5);color:var(--red)}
+.issues{list-style:none;margin:0 18px 16px;display:flex;flex-direction:column;gap:6px;font-size:12px;line-height:1.45}
+.issues li{border-radius:8px;padding:7px 10px}
+.issues li.err{background:rgba(255,77,94,.08);color:#ffb3bb;border:1px solid rgba(255,77,94,.3)}
+.issues li.warn{background:rgba(255,210,62,.07);color:#ffe9a3;border:1px solid rgba(255,210,62,.3)}
+.issues li.okline{background:rgba(47,224,140,.07);color:#a9f4cd;border:1px solid rgba(47,224,140,.3)}
+.builder-stats{display:flex;flex-direction:column;gap:8px}
+.bstat{display:flex;justify-content:space-between;align-items:baseline;gap:10px;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:8px 12px}
+.bstat span{font-size:11px;color:var(--muted2);letter-spacing:.04em}
+.bstat b{font-size:14px;font-variant-numeric:tabular-nums;text-align:right}
+
+/* ============ СИМУЛЯТОР ПК ============ */
+.fc-subtabs{margin-bottom:14px}
+.fc-panel{display:none}
+.fc-panel.active{display:block}
+.fc-stage{display:none}
+.fc-stage.active{display:block}
+.pid-preset-row{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px}
+.pid-preset{background:var(--panel3);border:1px solid var(--line2);color:var(--cyan2);font-size:11px;font-weight:600;border-radius:8px;padding:7px 10px;transition:all .15s;line-height:1.3}
+.pid-preset:hover{border-color:var(--cyan);color:#fff}
+.pid-preset.danger{color:#ffb3bb;border-color:rgba(255,77,94,.4)}
+.pid-preset.danger:hover{border-color:var(--red)}
+.fc-stage-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:10px;flex-wrap:wrap}
+.fc-stage-title{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted2)}
+canvas#pidCanvas{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:12px}
+.pid-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:12px 0}
+@media(max-width:700px){.pid-metrics{grid-template-columns:repeat(2,1fr)}}
+.fc-verdict{display:flex;align-items:center;gap:10px;border-radius:11px;padding:11px 14px;font-weight:800;letter-spacing:.06em;font-size:12px;border:1px solid;margin-bottom:10px}
+.fc-verdict .lamp-dot{width:12px;height:12px;border-radius:50%;background:currentColor;box-shadow:0 0 10px currentColor;flex:0 0 auto}
+.fc-verdict.ok{background:rgba(47,224,140,.09);border-color:rgba(47,224,140,.45);color:var(--green)}
+.fc-verdict.warn{background:rgba(255,210,62,.08);border-color:rgba(255,210,62,.4);color:var(--yellow)}
+.fc-verdict.bad{background:rgba(255,77,94,.09);border-color:rgba(255,77,94,.45);color:var(--red)}
+.pid-diag{font-size:13px;color:var(--muted);line-height:1.6;background:var(--bg);border:1px dashed var(--line2);border-radius:11px;padding:11px 14px}
+canvas#mixCanvas{display:block;margin:0 auto;max-width:100%;height:auto;border:1px solid var(--line);border-radius:12px}
+.arm-zone{display:flex;align-items:center;gap:12px;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:14px}
+.arm-lamp{width:18px;height:18px;border-radius:50%;background:#3a4a70;flex:0 0 auto;transition:all .2s}
+.arm-lamp.on{background:var(--red);box-shadow:0 0 14px var(--red);animation:pulse .8s infinite}
+.arm-btn{background:linear-gradient(135deg,#1f2c55,#263563);border:1.5px solid var(--line2);color:var(--text);font-weight:900;letter-spacing:.18em;font-size:15px;border-radius:12px;padding:14px 30px;transition:all .2s}
+.arm-btn:hover{border-color:var(--cyan)}
+.arm-btn.armed{background:linear-gradient(135deg,#ff2233,#ff7a1a);border-color:transparent;color:#fff;box-shadow:0 8px 26px rgba(255,40,40,.4)}
+.arm-text{font-size:12px;color:var(--muted)}
+.cli-log{
+  background:#05070f;border:1px solid var(--line);border-radius:12px;min-height:340px;max-height:430px;overflow-y:auto;
+  padding:14px;font-family:"Consolas","JetBrains Mono",monospace;font-size:12.5px;line-height:1.55;color:#8ae4a8;white-space:pre-wrap;margin-bottom:10px
+}
+.cli-form{display:flex;gap:8px;align-items:center;background:#05070f;border:1px solid var(--line);border-radius:12px;padding:8px 12px}
+.cli-prompt{color:#38d0ff;font-family:Consolas,monospace;font-weight:700}
+.cli-form input{flex:1;background:transparent;border:none;outline:none;color:#e9eefb;font-family:Consolas,monospace;font-size:13px}
+.cli-send{background:var(--panel3);border:1px solid var(--line2);color:var(--cyan2);border-radius:8px;padding:6px 16px;font-size:12px;font-weight:700}
+.cli-send:hover{border-color:var(--cyan);color:#fff}
+.cli-quick-row{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
+.cli-quick{background:var(--panel3);border:1px solid var(--line2);color:var(--muted);font-family:Consolas,monospace;font-size:11px;border-radius:8px;padding:6px 10px}
+.cli-quick:hover{color:var(--cyan2);border-color:var(--cyan)}
+
+/* ============ НАСТАВНИКУ ============ */
+.lab-grid-teacher{display:grid;grid-template-columns:1.05fr 1fr;gap:16px;align-items:start}
+@media(max-width:1100px){.lab-grid-teacher{grid-template-columns:1fr}}
+.journal-name{display:flex;flex-direction:column;gap:6px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted2);margin-bottom:12px}
+.journal-name input{background:var(--bg);border:1px solid var(--line2);color:var(--text);border-radius:10px;padding:11px 12px;font-size:14px}
+.journal-name input:focus{outline:none;border-color:var(--cyan)}
+.journal-items{display:flex;flex-direction:column;gap:8px}
+.journal-item{display:flex;gap:12px;align-items:flex-start;background:var(--bg);border:1px solid var(--line);border-radius:11px;padding:10px 12px;cursor:pointer;font-size:12.5px;line-height:1.5;color:var(--muted);transition:all .15s}
+.journal-item:hover{border-color:var(--line2);color:var(--text)}
+.journal-item input{width:17px;height:17px;margin-top:2px;accent-color:var(--orange);flex:0 0 auto}
+.journal-item input:checked + span{color:var(--green)}
+.journal-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:12px}
+.journal-track{flex:1;height:8px;border-radius:4px;background:var(--panel3);overflow:hidden}
+.journal-fill{height:100%;background:linear-gradient(90deg,var(--orange),var(--yellow));width:0%;transition:width .3s}
+.ach-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:10px}
+.ach-badge{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px 10px;text-align:center}
+.ach-badge.locked{opacity:.45;filter:grayscale(1)}
+.ach-badge.unlocked{border-color:rgba(255,210,62,.45);box-shadow:0 0 18px rgba(255,210,62,.08)}
+.ach-icon{width:44px;height:44px;margin:0 auto 8px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:var(--panel3)}
+.ach-badge.unlocked .ach-icon{background:rgba(255,210,62,.12);color:var(--yellow)}
+.ach-icon svg{width:24px;height:24px}
+.ach-name{font-size:11px;font-weight:800;line-height:1.3}
+.ach-desc{font-size:9px;color:var(--muted2);margin-top:4px;line-height:1.35}
+.ach-count{font-size:11px;color:var(--muted2);margin-left:auto;letter-spacing:0;text-transform:none}
+.teacher-side{display:flex;flex-direction:column;gap:16px}
+.clearance-card p{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:14px}
+.clearance-actions{display:flex;gap:10px;flex-wrap:wrap}
+
+/* ============ ТОСТ ============ */
+.ae-toast{
+  position:fixed;right:18px;bottom:18px;z-index:100;max-width:320px;
+  background:linear-gradient(135deg,#1c2a4e,#141f3d);border:1px solid var(--yellow);color:var(--yellow);
+  font-size:13px;font-weight:700;border-radius:12px;padding:13px 18px;box-shadow:0 14px 40px rgba(0,0,0,.5);
+  opacity:0;transform:translateY(16px);pointer-events:none;transition:all .3s
+}
+.ae-toast.show{opacity:1;transform:translateY(0)}
+
+/* ============ ПЕЧАТЬ ДОПУСКА ============ */
+.print-only{display:none}
+@media print{
+  body > *{display:none !important}
+  body{background:#fff}
+  #printSheet{display:block !important;color:#111}
+  @page{size:A5 landscape;margin:9mm}
+  .sheet-border{border:3px double #1a2a4e;border-radius:6px;padding:26px 34px;height:100%;display:flex;flex-direction:column;gap:10px}
+  .sheet-top{font-size:11px;letter-spacing:.3em;color:#1a2a4e;text-align:center;font-weight:800}
+  #printSheet h1{font-size:34px;letter-spacing:.14em;text-align:center;color:#1a2a4e;margin:2px 0}
+  .sheet-sub{text-align:center;color:#445;font-size:12px}
+  .sheet-name{text-align:center;font-size:24px;font-weight:800;margin-top:10px}
+  .sheet-line{border-bottom:1.5px solid #1a2a4e;margin:0 auto;width:60%}
+  #printSheet p{font-size:12px;line-height:1.6;text-align:center;color:#223}
+  .sheet-stats{display:flex;gap:30px;justify-content:center;margin:6px 0}
+  .sheet-stats div{text-align:center}
+  .sheet-stats b{font-size:22px;color:#1a2a4e}
+  .sheet-stats span{display:block;font-size:10px;color:#556;letter-spacing:.06em;text-transform:uppercase}
+  .sheet-foot{margin-top:auto;display:flex;justify-content:space-between;align-items:flex-end;font-size:11px;color:#334}
+  .sheet-qr{width:78px;height:78px}
+}
+
 /* ============ ФУТЕР ============ */
 footer{border-top:1px solid var(--line);background:rgba(11,18,32,.6)}
 .footer-inner{max-width:1460px;margin:0 auto;padding:20px 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center;font-size:12px;color:var(--muted2)}
@@ -285,8 +429,11 @@ footer{border-top:1px solid var(--line);background:rgba(11,18,32,.6)}
       <button class="nav-btn active" data-tab="tunnel" role="tab"><svg viewBox="0 0 24 24"><path d="M3 8h9a3 3 0 1 0-3-3M3 12h14a3 3 0 1 1-3 3M3 16h7"/></svg>Аэродинамическая труба</button>
       <button class="nav-btn" data-tab="venturi" role="tab"><svg viewBox="0 0 24 24"><path d="M2 9h6l3 6h4l3-6h4"/><path d="M2 15h6"/></svg>Трубка Вентури</button>
       <button class="nav-btn" data-tab="prop" role="tab"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="1.6"/><path d="M12 10.4C12 6 13.5 3 16 2.6 17 6 15.4 9 12 10.4ZM12 13.6C12 18 10.5 21 8 21.4 7 18 8.6 15 12 13.6ZM10.4 12C6 12 3 10.5 2.6 8 6 7 9 8.6 10.4 12ZM13.6 12C18 12 21 13.5 21.4 16 18 17 15 15.4 13.6 12Z"/></svg>Воздушный винт</button>
+      <button class="nav-btn" data-tab="builder" role="tab"><svg viewBox="0 0 24 24"><path d="M14.5 6.5 17 4l3 3-2.5 2.5M14.5 6.5 4 17l3 3L17.5 9.5M14.5 6.5l3 3"/></svg>Конструктор БПЛА</button>
+      <button class="nav-btn" data-tab="fcsim" role="tab"><svg viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="2"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></svg>Симулятор ПК</button>
       <button class="nav-btn" data-tab="quiz" role="tab"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.4 9.2a2.7 2.7 0 0 1 5.3.9c0 1.8-2.6 2.1-2.6 3.6"/><path d="M12 16.8h.01"/></svg>Квиз «Аэро-Эрудит»</button>
       <button class="nav-btn" data-tab="formulas" role="tab"><svg viewBox="0 0 24 24"><path d="M5 19 10 5l2.5 8L15 9h4"/><path d="M5 11h3"/></svg>Формулы и методичка</button>
+      <button class="nav-btn" data-tab="teacher" role="tab"><svg viewBox="0 0 24 24"><path d="M12 4 2 9l10 5 10-5-10-5z"/><path d="M6 11v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/><path d="M22 9v6"/></svg>Наставнику</button>
     </nav>
   </div>
 </header>
@@ -612,6 +759,212 @@ footer{border-top:1px solid var(--line);background:rgba(11,18,32,.6)}
   </div>
 </section>
 
+
+<!-- ══════════ МОДУЛЬ: КОНСТРУКТОР БПЛА ══════════ -->
+<section class="tab-page" id="page-builder" role="tabpanel">
+  <div class="lab-grid-builder">
+    <div class="card controls">
+      <h2><span class="h-icon"><svg viewBox="0 0 24 24"><path d="M14.5 6.5 17 4l3 3-2.5 2.5M14.5 6.5 4 17l3 3L17.5 9.5M14.5 6.5l3 3"/></svg></span>Конструктор БПЛА</h2>
+
+      <div class="control-block">
+        <div class="control-label"><span>1 · Рама</span></div>
+        <div class="comp-grid" id="frameCards"></div>
+      </div>
+      <div class="control-block">
+        <div class="control-label"><span>2 · Винтомоторная группа (мотор + винт)</span></div>
+        <div class="comp-grid" id="vgmCards"></div>
+      </div>
+      <div class="control-block">
+        <div class="control-label"><span>3 · Регуляторы (ESC)</span></div>
+        <div class="comp-grid" id="escCards"></div>
+      </div>
+      <div class="control-block">
+        <div class="control-label"><span>4 · Аккумулятор</span></div>
+        <div class="comp-grid" id="battCards"></div>
+      </div>
+      <div class="control-block">
+        <div class="control-label"><span>5 · Полётный контроллер</span></div>
+        <div class="comp-grid" id="fcCards"></div>
+      </div>
+      <p class="card-note">Правило первого коптера: <b>T/W ≥ 2</b> и ни одной ошибки совместимости. Характеристики учебные, но честные: пределы рамы, напряжение, токи и отдача батареи проверяются.</p>
+    </div>
+
+    <div class="card builder-stage">
+      <div class="tunnel-header"><span class="tunnel-title">Схема сверху · X-раскладка</span><span class="tunnel-title" style="color:var(--cyan2)">CW — синие · CCW — оранжевые</span></div>
+      <svg id="quadSvg" viewBox="0 0 300 236" role="img" aria-label="Схема квадрокоптера сверху"></svg>
+      <div class="tw-gauge">
+        <div class="tw-head"><span>Тяга / вес (T/W)</span><b id="bTw">—</b></div>
+        <div class="tw-track"><div class="tw-fill" id="bTwBar"></div></div>
+        <div class="tw-scale"><span>1.0 не взлетит</span><span>1.6 вяло</span><span>2.0+ норма</span><span>3.0+ ракета</span></div>
+      </div>
+      <div class="build-verdict ok" id="bVerdict"><span id="bVerdictText">—</span></div>
+      <ul class="issues" id="bIssues"></ul>
+    </div>
+
+    <div class="instruments">
+      <div class="card">
+        <h2><span class="h-icon"><svg viewBox="0 0 24 24"><path d="M4 20h16M6 16V9M12 16V4M18 16v-6"/></svg></span>Сводка сборки</h2>
+        <div class="builder-stats">
+          <div class="bstat"><span>Взлётная масса</span><b id="bTotalWeight">—</b></div>
+          <div class="bstat"><span>Суммарная тяга</span><b id="bThrust">—</b></div>
+          <div class="bstat"><span>Газ на висении</span><b id="bHover">—</b></div>
+          <div class="bstat"><span>Ток висения</span><b id="bIhover">—</b></div>
+          <div class="bstat"><span>Оценка висения</span><b id="bFlightTime">—</b></div>
+          <div class="bstat"><span>Цена комплекта</span><b id="bPrice">—</b></div>
+          <div class="bstat"><span>Батарея по току</span><b id="bBattA">—</b></div>
+        </div>
+      </div>
+      <div class="card">
+        <h2><span class="h-icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3 8-8"/><path d="M4 20h16"/></svg></span>Задания сборщика</h2>
+        <div class="tasks">
+          <div class="task" id="bTask1"><div class="task-num">1</div><div class="task-body"><div class="task-text"><b>Первый полёт:</b> любой комплект без ошибок, тяга/вес ≥ 1,6.</div><div class="task-foot"><span class="task-status" id="bTaskStatus1">—</span><button class="task-btn" id="bTaskCheck1">Проверить</button></div></div></div>
+          <div class="task" id="bTask2"><div class="task-num">2</div><div class="task-body"><div class="task-text"><b>Кругосветка:</b> без ошибок и висение ≥ 12 минут.</div><div class="task-foot"><span class="task-status" id="bTaskStatus2">—</span><button class="task-btn" id="bTaskCheck2">Проверить</button></div></div></div>
+          <div class="task" id="bTask3"><div class="task-num">3</div><div class="task-body"><div class="task-text"><b>Съёмочный комплект:</b> без ошибок, тяга ≥ 3 кг, цена ≤ 30 000 ₽.</div><div class="task-foot"><span class="task-status" id="bTaskStatus3">—</span><button class="task-btn" id="bTaskCheck3">Проверить</button></div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ МОДУЛЬ: СИМУЛЯТОР ПОЛЁТНОГО КОНТРОЛЛЕРА ══════════ -->
+<section class="tab-page" id="page-fcsim" role="tabpanel">
+  <div class="lab-grid-2">
+    <div class="card controls">
+      <h2><span class="h-icon"><svg viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="2"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></svg></span>Симулятор полётного контроллера</h2>
+
+      <div class="segmented fc-subtabs" role="tablist">
+        <button class="fc-subtab active" data-fc="pid">PID-бенч</button>
+        <button class="fc-subtab" data-fc="motors">Моторы и микшер</button>
+        <button class="fc-subtab" data-fc="cli">Консоль CLI</button>
+      </div>
+
+      <div class="fc-panel active" id="fcPanel-pid">
+        <div class="control-block">
+          <div class="control-label"><span>P — пропорциональный</span><output id="pidPOut">45</output></div>
+          <input type="range" id="pidP" min="0" max="200" step="1" value="45">
+        </div>
+        <div class="control-block">
+          <div class="control-label"><span>I — интегральный</span><output id="pidIOut">35</output></div>
+          <input type="range" id="pidI" min="0" max="150" step="1" value="35">
+        </div>
+        <div class="control-block">
+          <div class="control-label"><span>D — дифференциальный</span><output id="pidDOut">25</output></div>
+          <input type="range" id="pidD" min="0" max="80" step="1" value="25">
+        </div>
+        <div class="control-block">
+          <div class="control-label"><span>FF — feedforward</span><output id="pidFfOut">15</output></div>
+          <input type="range" id="pidFf" min="0" max="150" step="1" value="15">
+        </div>
+        <div class="pid-preset-row">
+          <button class="pid-preset" data-preset="factory">Заводские 45/35/25</button>
+          <button class="pid-preset" data-preset="soft">Мягкий фристайл 30/25/32</button>
+          <button class="pid-preset danger" data-preset="ringing">Звенит: 140/60/4 — почини!</button>
+          <button class="pid-preset" data-preset="lazy">Вялый: 12/10/12</button>
+        </div>
+        <button class="btn btn-primary" id="pidFlash" style="width:100%;justify-content:center">Записать в флеш → CLI</button>
+        <p class="card-note">Ступенька 0 → 25° угла тангажа, рампа 250 мс. Зелёная полоса — коридор ±2°. Подбирайте так, чтобы отклик входил в неё быстро и без перелёта.</p>
+      </div>
+
+      <div class="fc-panel" id="fcPanel-motors">
+        <div class="arm-zone">
+          <span class="arm-lamp" id="mixArmLamp"></span>
+          <button class="arm-btn" id="mixArm">ARM</button>
+          <span class="arm-text" id="mixArmText">Моторы заблокированы</span>
+        </div>
+        <div class="control-block">
+          <div class="control-label"><span>Газ</span><output id="mixThrottleOut">35 %</output></div>
+          <input type="range" id="mixThrottle" min="0" max="100" step="1" value="35">
+        </div>
+        <div class="control-block">
+          <div class="control-label"><span>Крен</span><output id="mixRollOut">+0</output></div>
+          <input type="range" id="mixRoll" min="-100" max="100" step="1" value="0">
+        </div>
+        <div class="control-block">
+          <div class="control-label"><span>Тангаж</span><output id="mixPitchOut">+0</output></div>
+          <input type="range" id="mixPitch" min="-100" max="100" step="1" value="0">
+        </div>
+        <div class="control-block">
+          <div class="control-label"><span>Рысканье</span><output id="mixYawOut">+0</output></div>
+          <input type="range" id="mixYaw" min="-100" max="100" step="1" value="0">
+        </div>
+        <p class="card-note">X-раскладка: <b>M1·M3 CW</b>, <b>M2·M4 CCW</b> — диагональные пары в одну сторону. Микшер Betaflight: газ ± дифференциалы. С arм введите коптер «в боевую готовность» и крутите стики.</p>
+      </div>
+
+      <div class="fc-panel" id="fcPanel-cli">
+        <p style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:10px">Настоящий Betaflight CLI в учебной сборке. Попробуйте: <b>help</b>, <b>status</b>, <b>dump</b>, <b>get pid_roll_p</b>, <b>set pid_roll_d 30</b>, <b>save</b>.</p>
+        <div class="cli-quick-row">
+          <button class="cli-quick" data-cmd="help">help</button>
+          <button class="cli-quick" data-cmd="status">status</button>
+          <button class="cli-quick" data-cmd="dump">dump</button>
+          <button class="cli-quick" data-cmd="set pid_roll_d 30">set pid_roll_d 30</button>
+          <button class="cli-quick" data-cmd="save">save</button>
+        </div>
+        <p class="card-note" style="margin-top:12px">Команды <b>set</b> мгновенно переносятся на PID-бенч — как в реальной конфигурации.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="fc-stage active" id="fcStage-pid">
+        <div class="fc-stage-head"><span class="fc-stage-title">Отклик на ступеньку · угол тангажа</span><span class="fc-stage-title" style="color:var(--cyan2)">дельта 0 → 25°</span></div>
+        <canvas id="pidCanvas" width="820" height="300"></canvas>
+        <div class="pid-metrics">
+          <div class="readout"><div class="readout-label">Перерегулирование</div><div class="readout-value" style="font-size:18px"><span id="pidOvershoot">—</span></div></div>
+          <div class="readout"><div class="readout-label">Время устан.</div><div class="readout-value" style="font-size:18px"><span id="pidSettle">—</span></div></div>
+          <div class="readout"><div class="readout-label">Колебаний</div><div class="readout-value" style="font-size:18px"><span id="pidOsc">—</span></div></div>
+          <div class="readout"><div class="readout-label">Установилось</div><div class="readout-value" style="font-size:18px"><span id="pidEnd">—</span></div></div>
+        </div>
+        <div class="fc-verdict ok" id="pidVerdict"><span class="lamp-dot"></span><b id="pidVerdictText">—</b></div>
+        <p class="pid-diag" id="pidDiag"></p>
+      </div>
+
+      <div class="fc-stage" id="fcStage-motors">
+        <div class="fc-stage-head"><span class="fc-stage-title">Верхний вид · микшер QUADX</span><span class="fc-stage-title" style="color:var(--cyan2)">M1 ПП · M2 ЗП · M3 ЗЛ · M4 ПЛ</span></div>
+        <canvas id="mixCanvas" width="470" height="430"></canvas>
+        <p class="pid-diag" style="margin-top:12px">Понаблюдайте: на тангаж вперёд M3/M4 (задние) прибавляют, на крен вправо — M1/M2 уменьшаются, рысканье давит диагональные пары в противофазе. Так самолётная логика превращается в газ на каждый мотор.</p>
+      </div>
+
+      <div class="fc-stage" id="fcStage-cli">
+        <div class="fc-stage-head"><span class="fc-stage-title">Betaflight CLI · учебный полётник</span><span class="fc-stage-title" style="color:var(--green)">SITL</span></div>
+        <pre class="cli-log" id="cliOutput"></pre>
+        <form class="cli-form" id="cliForm"><span class="cli-prompt">&gt;</span><input id="cliInput" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="help" aria-label="Команда CLI"><button class="cli-send" type="submit">Enter ↵</button></form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ МОДУЛЬ: НАСТАВНИКУ ══════════ -->
+<section class="tab-page" id="page-teacher" role="tabpanel">
+  <div class="lab-grid-teacher">
+    <div class="card">
+      <h2><span class="h-icon"><svg viewBox="0 0 24 24"><path d="M5 4h14v16H5z"/><path d="M9 9h6M9 13h6M9 17h4"/></svg></span>Журнал ученика</h2>
+      <label class="journal-name">Имя ученика
+        <input id="learnerName" type="text" placeholder="Например, Артём К., 7 класс, группа А-2" maxlength="90">
+      </label>
+      <div id="journalItems" class="journal-items"></div>
+      <div class="journal-foot">
+        <span style="font-size:12px;color:var(--muted)">Пройдено: <b id="journalDone" style="color:var(--cyan2)">0 / 10</b></span>
+        <div class="journal-track"><div class="journal-fill" id="journalBar"></div></div>
+      </div>
+      <p class="card-note" style="margin-top:12px">Отмечайте пункты по факту прохождения — галочки и имя хранятся локально в браузере этого компьютера, никуда не отправляются.</p>
+    </div>
+
+    <div class="teacher-side">
+      <div class="card">
+        <h2><span class="h-icon"><svg viewBox="0 0 24 24"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M7 6H4a1 1 0 0 0-1 1 4 4 0 0 0 4 4M17 6h3a1 1 0 0 1 1 1 4 4 0 0 1-4 4"/></svg></span>Достижения<span class="ach-count" id="achCount">0 / 7</span></h2>
+        <div class="ach-grid" id="achGrid"></div>
+      </div>
+      <div class="card clearance-card">
+        <h2><span class="h-icon"><svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 9.5-8 10-4.5-.5-8-5-8-10V6l8-4z"/><path d="M9.5 12.5l2 2 3.5-4"/></svg></span>Допуск к полётам</h2>
+        <p>Печатный сертификат для ученика: имя, дата, число достижений и пунктов журнала, место под подпись наставника. Печатается на A5-альбоме — повесьте в кабинете или вклейте в портфолио «Кванториум.Ориентиры».</p>
+        <div class="clearance-actions">
+          <button class="btn btn-primary" id="printClearance"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg>Печать допуска</button>
+          <button class="btn btn-ghost" id="resetProgress">Сбросить прогресс</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 </main>
 
 <!-- ══════════ ФУТЕР ══════════ -->
@@ -620,15 +973,49 @@ footer{border-top:1px solid var(--line);background:rgba(11,18,32,.6)}
     <div>АэроЛаб · виртуальная лаборатория <b>Аэроквантума</b> — по аналогии с <a href="https://урокихимии.рф" rel="nofollow">урокихимии.рф</a> и <a href="https://урокробототехники.рф" rel="nofollow">урокробототехники.рф</a><br>Симуляция упрощена и предназначена для учебных целей. Кванториум · Аэроквантум, 2026.</div>
     <div style="text-align:right">
       <a class="btn btn-ghost" style="padding:8px 14px;font-size:12px;margin-bottom:8px" href="https://pavelb-coder.github.io/sim-aero/" target="_blank" rel="noopener">Открыть онлайн: GitHub Pages ↗</a><br>
-      <span class="version-tag">v2026.11.14-02</span>
+      <span class="version-tag">v2026.11.14-03</span>
     </div>
   </div>
 </footer>
+
+<!-- Печатный «Допуск к полётам» (виден только при печати) -->
+<div id="printSheet" class="print-only" aria-hidden="true">
+  <div class="sheet-border">
+    <div class="sheet-top">КВАНТОРИУМ · АЭРОКВАНТУМ</div>
+    <h1>ДОПУСК К ПОЛЁТАМ</h1>
+    <div class="sheet-sub">выдан ученику Аэроквантума за освоение программы</div>
+    <div class="sheet-name" id="sheetLearner">____________________________</div>
+    <div class="sheet-line"></div>
+    <p>Подтверждает освоение: аэродинамика (виртуальная труба, срыв потока) · трубка Вентури и уравнение Бернулли · расчёт воздушного винта · сборка и диагностика БПЛА · симулятор полётного контроллера (Betaflight SITL: PID, микшер, CLI) · итоговый квиз «Аэро-Эрудит»</p>
+    <div class="sheet-stats">
+      <div><b id="sheetAchievements">0</b><span>достижений</span></div>
+      <div><b id="sheetJournal">0 / 10</b><span>пунктов журнала</span></div>
+    </div>
+    <div class="sheet-foot">
+      <div>Дата выдачи: <span id="sheetDate">—</span><br>Подпись наставника: ____________________________</div>
+      <svg class="sheet-qr" viewBox="0 0 84 84" role="img" aria-label="Учебный QR-код Аэроквантума">
+        <rect width="84" height="84" fill="#fff"/>
+        <g fill="#1a2a4e">
+          <rect x="6" y="6" width="22" height="22"/><rect x="10" y="10" width="14" height="14" fill="#fff"/><rect x="14" y="14" width="6" height="6"/>
+          <rect x="56" y="6" width="22" height="22"/><rect x="60" y="10" width="14" height="14" fill="#fff"/><rect x="64" y="14" width="6" height="6"/>
+          <rect x="6" y="56" width="22" height="22"/><rect x="10" y="60" width="14" height="14" fill="#fff"/><rect x="14" y="64" width="6" height="6"/>
+          <rect x="36" y="8" width="5" height="5"/><rect x="45" y="16" width="5" height="5"/><rect x="36" y="24" width="5" height="5"/><rect x="45" y="32" width="5" height="5"/><rect x="36" y="40" width="5" height="5"/>
+          <rect x="56" y="36" width="6" height="6"/><rect x="68" y="40" width="8" height="6"/><rect x="56" y="48" width="5" height="9"/>
+          <rect x="38" y="52" width="6" height="5"/><rect x="48" y="60" width="5" height="5"/><rect x="66" y="62" width="6" height="6"/>
+          <rect x="36" y="68" width="5" height="8"/><rect x="48" y="72" width="22" height="5"/><rect x="70" y="52" width="5" height="5"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</div>
 
 <script src="js/main.js"></script>
 <script src="js/tunnel.js"></script>
 <script src="js/venturi.js"></script>
 <script src="js/prop.js"></script>
 <script src="js/quiz.js"></script>
+<script src="js/builder.js"></script>
+<script src="js/fcsim.js"></script>
+<script src="js/teacher.js"></script>
 </body>
 </html>

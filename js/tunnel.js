@@ -437,6 +437,11 @@ window.AeroLab = window.AeroLab || {};
       const ok = task.check(state);
       div.classList.toggle('done', ok);
       div.querySelector('.task-status').textContent = ok ? '✓ Выполнено! Так держать.' : 'Пока нет — крутите стенд дальше.';
+      if (ok) {
+        if (task.id === 2) window.AeroLab.unlock('stall_hunter');
+        const allDone = $$('.task', taskList).every(t => t.classList.contains('done'));
+        if (allDone) window.AeroLab.unlock('polar_master');
+      }
     });
     taskList.appendChild(div);
   });

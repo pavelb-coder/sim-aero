@@ -77,6 +77,7 @@
   });
 
   function showResult() {
+    if (score >= 10) window.AeroLab.unlock('quiz_ace');
     el.progress.style.width = '100%';
     el.counter.textContent = 'Готово!';
     el.question.textContent = 'Ваш результат:';

@@ -66,6 +66,7 @@
     if (correct) {
       feedback.textContent = 'Верно! В горловине скорость максимальна → давление минимально (Бернулли).';
       feedback.style.color = 'var(--green)';
+      window.AeroLab.unlock('venturi_ace');
     } else {
       feedback.textContent = 'Не совсем: давление минимально там, где поток быстрее всего, — в сужении.';
       feedback.style.color = 'var(--red)';

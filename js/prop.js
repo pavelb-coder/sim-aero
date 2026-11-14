@@ -62,6 +62,7 @@
       ? '✓ Выполнено! Запас тяги ' + c.maxMassQuad.toFixed(0) + ' г — коптер взлетит.'
       : 'Пока ' + c.maxMassQuad.toFixed(0) + ' г — мало. Добавьте диаметр, обороты или шаг.';
     el.taskStatus.style.color = ok ? 'var(--green)' : 'var(--red)';
+    if (ok) window.AeroLab.unlock('prop_master');
   });
 
   /* ── Вращение винта (с «размытием» лопастей) ── */
