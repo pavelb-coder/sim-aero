@@ -84,6 +84,10 @@ window.AeroLab = (function () {
       }
     }
     window.dispatchEvent(new CustomEvent('aerolab:achievement', { detail: id }));
+    // Мост для родительского окна (Moodle-плагин mod_aerolab слушает это)
+    if (window.parent && window.parent !== window) {
+      try { window.parent.postMessage({ source: 'aerolab', type: 'achievement', id: id }, '*'); } catch (e) { /* кросс-домен: молча */ }
+    }
     return true;
   }
   function achievementName(id) {
@@ -108,6 +112,11 @@ window.AeroLab = (function () {
     toast.classList.add('show');
     clearTimeout(toast._t);
     toast._t = setTimeout(() => toast.classList.remove('show'), 3800);
+  }
+
+  // Мост для родительского окна: сообщаем, что АэроЛаб загружен и какие достижения уже есть
+  if (window.parent && window.parent !== window) {
+    try { window.parent.postMessage({ source: 'aerolab', type: 'ready', achievements: getUnlocked() }, '*'); } catch (e) { /* молча */ }
   }
 
   return {
