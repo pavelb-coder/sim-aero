@@ -76,7 +76,6 @@ button{font-family:inherit;cursor:pointer}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
 h1.hero-title{font-size:clamp(26px,3.4vw,40px);line-height:1.12;font-weight:800;letter-spacing:-.01em}
 h1.hero-title .grad{background:linear-gradient(120deg,#ffd9ad 0%,var(--orange) 45%,#ff5e3a 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.hero-sub{margin-top:10px;color:var(--muted);font-size:15px;line-height:1.55}
 .hero-chips{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
 .chip{font-size:12px;color:var(--cyan2);background:var(--panel2);border:1px solid var(--line);padding:6px 12px;border-radius:8px}
 .hero-cta{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
@@ -158,8 +157,7 @@ canvas#tunnelCanvas{display:block;width:100%;height:auto;background:#060b18}
   padding:10px 26px;border-radius:10px;box-shadow:0 10px 34px rgba(255,40,40,.45);transition:all .25s;text-transform:uppercase;white-space:nowrap
 }
 .stall-badge.show{opacity:1;transform:translate(-50%,0) scale(1)}
-.tunnel-footer{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 16px;border-top:1px solid var(--line);font-size:11px;color:var(--muted2);flex-wrap:wrap}
-.legend{display:flex;align-items:center;gap:6px}
+.tunnel-.legend{display:flex;align-items:center;gap:6px}
 .legend-bar{width:110px;height:8px;border-radius:4px;background:linear-gradient(90deg,#1e6fff,#38d0ff,#eaffff,#ffb066,#ff5e3a)}
 
 /* ============ ПРИБОРЫ ============ */
@@ -402,11 +400,6 @@ canvas#mixCanvas{display:block;margin:0 auto;max-width:100%;height:auto;border:1
   .sheet-qr{width:78px;height:78px}
 }
 
-/* ============ ФУТЕР ============ */
-footer{border-top:1px solid var(--line);background:rgba(11,18,32,.6)}
-.footer-inner{max-width:1460px;margin:0 auto;padding:20px 22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center;font-size:12px;color:var(--muted2)}
-.footer-inner a{color:var(--cyan2);text-decoration:none}
-.version-tag{font-variant-numeric:tabular-nums;background:var(--panel2);border:1px solid var(--line);border-radius:6px;padding:2px 8px;font-size:10px}
 </style>
 </head>
 <body>
@@ -443,9 +436,8 @@ footer{border-top:1px solid var(--line);background:rgba(11,18,32,.6)}
   <div class="hero-text">
     <span class="kicker"><span class="dot"></span>Виртуальный стенд Аэроквантума</span>
     <h1 class="hero-title">Летать на компьютере — <span class="grad">чтобы уверенно летать в небе</span></h1>
-    <p class="hero-sub">По аналогии с «Виртуальной лабораторией химии» и «Симулятором Ардуино»: безопасный браузерный стенд для Аэроквантума. Крути поток, лови срыв, подбирай винт — теория «Учимся летать», «Базовый курс аэротехнологий» и «Летающие роботы» в интерактивной форме.</p>
     <div class="hero-chips">
-      <span class="chip">5 модулей</span>
+      <span class="chip">8 модулей</span>
       <span class="chip">9–17 лет</span>
       <span class="chip">Учебные задания с автопроверкой</span>
       <span class="chip">0 рублей и 0 риска</span>
@@ -966,17 +958,6 @@ footer{border-top:1px solid var(--line);background:rgba(11,18,32,.6)}
 </section>
 
 </main>
-
-<!-- ══════════ ФУТЕР ══════════ -->
-<footer>
-  <div class="footer-inner">
-    <div>АэроЛаб · виртуальная лаборатория <b>Аэроквантума</b> — по аналогии с <a href="https://урокихимии.рф" rel="nofollow">урокихимии.рф</a> и <a href="https://урокробототехники.рф" rel="nofollow">урокробототехники.рф</a><br>Симуляция упрощена и предназначена для учебных целей. Кванториум · Аэроквантум, 2026.</div>
-    <div style="text-align:right">
-      <a class="btn btn-ghost" style="padding:8px 14px;font-size:12px;margin-bottom:8px" href="https://pavelb-coder.github.io/sim-aero/" target="_blank" rel="noopener">Открыть онлайн: GitHub Pages ↗</a><br>
-      <span class="version-tag">v2026.11.14-03</span>
-    </div>
-  </div>
-</footer>
 
 <!-- Печатный «Допуск к полётам» (виден только при печати) -->
 <div id="printSheet" class="print-only" aria-hidden="true">
