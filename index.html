@@ -453,6 +453,110 @@ canvas#failsafeCanvas{width:100%;height:auto;display:block;border-radius:12px;bo
 .phx-note{font-size:12px;color:var(--muted);line-height:1.6;background:var(--bg);border:1px dashed var(--line2);border-radius:12px;padding:12px 14px}
 .phx-note b{color:var(--text)}
 
+
+/* ============ СБОРКА КВАДРОКОПТЕРА (монтажный стол) ============ */
+.lab-grid-wiring{display:grid;grid-template-columns:1fr 345px;gap:16px;align-items:start}
+@media(max-width:1150px){.lab-grid-wiring{grid-template-columns:1fr}}
+.wiring-stage{padding:0;overflow:hidden}
+.wb-toolbar{display:flex;gap:8px;flex-wrap:wrap}
+.wb-tool{background:var(--panel3);border:1px solid var(--line2);color:var(--muted);border-radius:8px;padding:6px 12px;font-size:11px;font-weight:700;transition:all .15s}
+.wb-tool:hover{color:#fff;border-color:var(--cyan)}
+.wb-tool.danger:hover{border-color:var(--red);color:#ffb3bb}
+.bench{
+  position:relative;aspect-ratio:1000/700;width:100%;overflow:hidden;
+  background:
+    radial-gradient(700px 300px at 50% -10%, rgba(56,208,255,.08), transparent 60%),
+    repeating-linear-gradient(0deg, transparent 0 39px, rgba(140,165,210,.05) 39px 40px),
+    repeating-linear-gradient(90deg, transparent 0 39px, rgba(140,165,210,.05) 39px 40px),
+    #0a1226;
+}
+.wires-svg{position:absolute;inset:0;width:100%;height:100%;z-index:1}
+.wire-shine{animation:wireShine 1.1s linear forwards}
+@keyframes wireShine{to{stroke-dashoffset:-56}}
+.wb-comp{position:absolute;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:13px;border:1.5px solid var(--line2);user-select:none}
+.wb-title{font-size:13px;font-weight:900;letter-spacing:.08em;color:var(--text);text-align:center}
+.wb-sub{font-size:8.5px;color:var(--muted2);margin-top:3px;text-align:center;line-height:1.35}
+.wb-bat{background:linear-gradient(135deg,#3a1220,#571c2b);border-color:#ff4d5e}
+.wb-bat::after{content:"";position:absolute;left:0;right:0;bottom:10px;height:10px;background:repeating-linear-gradient(45deg,#ff4d5e 0 14px,#1a0509 14px 28px);opacity:.85;border-radius:0 0 11px 11px}
+.wb-esc{background:linear-gradient(180deg,#1b2338,#141a2c)}
+.wb-heatsink{position:absolute;left:10%;right:10%;bottom:12px;height:16px;background:repeating-linear-gradient(90deg,#2c3a5e 0 6px,#182449 6px 12px);border-radius:4px}
+.wb-fc{background:linear-gradient(135deg,#0e3a26,#155233);border-color:#2fe08c}
+.wb-fc-inner{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+.wb-fc-mcu{background:#0a1f14;border:1px solid #2fe08c;color:#7dffb4;font-family:Consolas,monospace;font-size:12px;font-weight:700;padding:3px 10px;border-radius:4px;z-index:1}
+.wb-fc-chip{position:absolute;left:16%;top:22%;width:26px;height:16px;background:#0a1f14;border:1px solid #1e6f47;border-radius:2px}
+.wb-fc-chip.s{left:auto;right:18%;top:auto;bottom:24%;width:16px;height:16px}
+.wb-fc-usb{position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);width:44px;height:9px;background:#c9d4f0;border-radius:3px 3px 0 0;font-size:0}
+.wb-fc-led{position:absolute;top:8px;right:10px;width:10px;height:10px;border-radius:50%;background:#2a3a30;transition:all .3s}
+.wb-fc-led.on{background:#2fe08c;box-shadow:0 0 10px #2fe08c}
+.wb-fc-name{position:absolute;bottom:6px;left:0;right:0;text-align:center;font-size:8px;letter-spacing:.22em;color:#4dbb85}
+.wb-motor{background:radial-gradient(circle at 50% 42%,#131f3c,#0b1220);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+.wb-motor-svg{width:70%;max-width:56px;height:auto}
+.wb-motor-ring{stroke:#33477c;stroke-width:2.4;fill:none;stroke-dasharray:6 9;transition:stroke .25s}
+.wb-motor-name{font-size:8.5px;color:var(--muted);letter-spacing:.08em}
+.wb-motor.spinning{border-color:var(--cyan);box-shadow:0 0 18px rgba(56,208,255,.25)}
+.wb-motor.spinning .wb-motor-ring{stroke:#38d0ff;animation:dashspin .35s linear infinite}
+.wb-rx{background:linear-gradient(135deg,#241a3d,#322552);border-color:#b48cff}
+.wb-gps{background:linear-gradient(135deg,#101f3d,#1a3260);border-color:#38d0ff}
+.wb-antenna{position:absolute;right:10px;top:-7px;width:3px;height:22px;background:#8fa3c0;border-radius:2px;transform:rotate(24deg)}
+.wb-antenna.ceramic{width:26px;height:14px;top:8px;right:8px;border-radius:3px;background:repeating-linear-gradient(90deg,#c9d4f0 0 3px,#5a6b95 3px 6px);transform:none}
+.wb-cam{background:linear-gradient(135deg,#1a1a22,#26262f);border-color:#55576a}
+.wb-cam-lens{width:52%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 38% 36%,#4a3a6e,#14101f 70%);border:3px solid #0b0b12;box-shadow:inset 0 0 12px #000}
+.wb-vtx{background:linear-gradient(135deg,#33241a,#4a3320);border-color:#ff8a2a}
+.wb-sma{position:absolute;right:-9px;top:34%;width:12px;height:16px;background:#c9d4f0;border-radius:2px}
+.wb-buz{background:linear-gradient(135deg,#26262f,#33333f);border-color:#ff6fd8}
+.wb-pad{
+  position:absolute;z-index:3;width:27px;height:27px;border-radius:50%;transform:translate(-50%,-50%);
+  font-size:7.6px;font-weight:800;display:flex;align-items:center;justify-content:center;letter-spacing:0;
+  border:2px solid;cursor:pointer;transition:transform .12s, box-shadow .12s;background:#0e1730;padding:0
+}
+.wb-pad span{pointer-events:none}
+.wb-pad:hover{transform:translate(-50%,-50%) scale(1.3);z-index:4}
+.wb-pad.selected{box-shadow:0 0 0 3px #fff, 0 0 16px rgba(255,255,255,.5);transform:translate(-50%,-50%) scale(1.28);z-index:4}
+.wb-pad.hint-pulse{animation:padPulse .8s ease-in-out 3}
+@keyframes padPulse{0%,100%{box-shadow:0 0 0 0 rgba(255,210,62,0)}50%{box-shadow:0 0 0 5px rgba(255,210,62,.75),0 0 22px rgba(255,210,62,.6)}}
+.wb-pad.pad-error{animation:padError .8s}
+@keyframes padError{0%,100%{box-shadow:0 0 0 0 rgba(255,77,94,0)}30%{box-shadow:0 0 0 6px rgba(255,77,94,.8),0 0 24px rgba(255,77,94,.7)}}
+.type-vbat{border-color:#ff4d5e;color:#ff8a95}
+.type-pwr-src{border-color:#ff8a2a;color:#ffc08a}
+.type-pwr-in{border-color:#ffb066;color:#ffd9ad}
+.type-gnd{border-color:#8fa3c0;color:#c9d4f0}
+.type-pwm-out{border-color:#ffb066;color:#ffe4c2}
+.type-pwm-in{border-color:#ff8a2a;color:#ffc08a}
+.type-phase{border-color:#2fe08c;color:#8ff0c0}
+.type-serial-out{border-color:#38d0ff;color:#8ae4ff}
+.type-serial-in{border-color:#38d0ff;color:#8ae4ff}
+.type-video-out{border-color:#ffd23e;color:#ffe98a}
+.type-video-in{border-color:#ffd23e;color:#ffe98a}
+.type-buz-out{border-color:#ff6fd8;color:#ffb0ec}
+.type-buz-in{border-color:#ff6fd8;color:#ffb0ec}
+.bench-statusbar{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:11px 16px;border-top:1px solid var(--line);flex-wrap:wrap}
+.bench-msg{font-size:12px;color:var(--muted);line-height:1.5;max-width:70%}
+.wb-stats{display:flex;gap:14px;font-size:11px;color:var(--muted2);font-variant-numeric:tabular-nums;white-space:nowrap}
+.wb-stats b{color:var(--text)}
+.bench-flash{position:absolute;inset:0;z-index:5;background:rgba(255,60,60,.35);animation:flashFade .7s forwards;pointer-events:none}
+@keyframes flashFade{from{opacity:1}to{opacity:0}}
+.smoke-puff{position:absolute;width:34px;height:34px;border-radius:50%;background:radial-gradient(circle,rgba(210,210,210,.85),rgba(210,210,210,0) 70%);z-index:6;animation:smokeRise 1.35s forwards;pointer-events:none}
+@keyframes smokeRise{from{transform:translateY(6px) scale(.5);opacity:1}to{transform:translateY(-58px) scale(1.8);opacity:0}}
+.bench-shake{animation:benchShake .5s}
+@keyframes benchShake{0%,100%{transform:translate(0,0)}20%{transform:translate(-9px,3px)}40%{transform:translate(8px,-4px)}60%{transform:translate(-6px,-2px)}80%{transform:translate(5px,3px)}}
+.wiring-armzone{display:none;padding:12px 16px;border-top:1px solid var(--line)}
+.wiring-armzone.visible{display:block;animation:fadeIn .4s}
+.arm-btn.big{width:100%;padding:15px;font-size:15px}
+.wire-list{max-height:290px;overflow-y:auto}
+.wb-empty{font-size:12px;color:var(--muted2);padding:14px;text-align:center;border:1px dashed var(--line2);border-radius:10px}
+.wb-wire{display:flex;gap:9px;align-items:center;background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:6px 9px;margin-bottom:6px;font-size:11px}
+.wb-wire-dot{width:11px;height:11px;border-radius:50%;flex:0 0 auto}
+.wb-wire-text{color:var(--muted)}
+.wb-wire-text i{color:var(--muted2);font-style:normal}
+.wb-wire-del{margin-left:auto;background:none;border:none;color:var(--muted2);font-size:17px;line-height:1;padding:2px 6px;border-radius:6px}
+.wb-wire-del:hover{color:var(--red);background:rgba(255,77,94,.1)}
+.chk-group{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted2);margin:12px 2px 6px}
+.check-item{display:flex;gap:10px;align-items:center;background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:7px 10px;margin-bottom:6px;font-size:11.5px;color:var(--muted);transition:all .2s}
+.check-item.done{border-color:rgba(47,224,140,.4);color:var(--green)}
+.chk-box{width:17px;height:17px;border:1.5px solid var(--line2);border-radius:5px;position:relative;flex:0 0 auto;transition:all .2s}
+.check-item.done .chk-box{background:var(--green);border-color:var(--green)}
+.check-item.done .chk-box::after{content:"✓";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#052;font-size:11px;font-weight:900}
+
 /* ============ НАСТАВНИКУ ============ */
 .lab-grid-teacher{display:grid;grid-template-columns:1.05fr 1fr;gap:16px;align-items:start}
 @media(max-width:1100px){.lab-grid-teacher{grid-template-columns:1fr}}
@@ -537,6 +641,7 @@ canvas#failsafeCanvas{width:100%;height:auto;display:block;border-radius:12px;bo
       <button class="nav-btn" data-tab="builder" role="tab"><svg viewBox="0 0 24 24"><path d="M14.5 6.5 17 4l3 3-2.5 2.5M14.5 6.5 4 17l3 3L17.5 9.5M14.5 6.5l3 3"/></svg>Конструктор БПЛА</button>
       <button class="nav-btn" data-tab="fcsim" role="tab"><svg viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="2"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></svg>Симулятор ПК</button>
       <button class="nav-btn" data-tab="pixhawk" role="tab"><svg viewBox="0 0 24 24"><path d="M12 2 22 12 12 22 2 12Z"/><path d="M12 7v5l3 2"/></svg>Симулятор Pixhawk</button>
+      <button class="nav-btn" data-tab="wiring" role="tab"><svg viewBox="0 0 24 24"><path d="M9 7V3M15 7V3M7 7h10v6a5 5 0 0 1-10 0V7z"/><path d="M12 18v4"/></svg>Сборка квадрокоптера</button>
       <button class="nav-btn" data-tab="quiz" role="tab"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.4 9.2a2.7 2.7 0 0 1 5.3.9c0 1.8-2.6 2.1-2.6 3.6"/><path d="M12 16.8h.01"/></svg>Квиз «Аэро-Эрудит»</button>
       <button class="nav-btn" data-tab="formulas" role="tab"><svg viewBox="0 0 24 24"><path d="M5 19 10 5l2.5 8L15 9h4"/><path d="M5 11h3"/></svg>Формулы и методичка</button>
       <button class="nav-btn" data-tab="teacher" role="tab"><svg viewBox="0 0 24 24"><path d="M12 4 2 9l10 5 10-5-10-5z"/><path d="M6 11v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/><path d="M22 9v6"/></svg>Наставнику</button>
@@ -550,7 +655,7 @@ canvas#failsafeCanvas{width:100%;height:auto;display:block;border-radius:12px;bo
     <span class="kicker"><span class="dot"></span>Виртуальный стенд Аэроквантума</span>
     <h1 class="hero-title">Летать на компьютере — <span class="grad">чтобы уверенно летать в небе</span></h1>
     <div class="hero-chips">
-      <span class="chip">8 модулей</span>
+      <span class="chip">9 модулей</span>
       <span class="chip">9–17 лет</span>
       <span class="chip">Учебные задания с автопроверкой</span>
       <span class="chip">0 рублей и 0 риска</span>
@@ -1216,6 +1321,82 @@ canvas#failsafeCanvas{width:100%;height:auto;display:block;border-radius:12px;bo
   </div>
 </section>
 
+
+<!-- ══════════ МОДУЛЬ: СБОРКА КВАДРОКОПТЕРА ══════════ -->
+<section class="tab-page" id="page-wiring" role="tabpanel">
+  <div class="lab-grid-wiring">
+    <div class="card wiring-stage">
+      <div class="tunnel-header">
+        <span class="tunnel-title">Монтажный стол · как на настоящем билде</span>
+        <div class="wb-toolbar">
+          <button class="wb-tool" id="wiringHint">Подсветить шаг</button>
+          <button class="wb-tool" id="wiringUndo">Убрать последний</button>
+          <button class="wb-tool danger" id="wiringReset">Сжечь схему</button>
+        </div>
+      </div>
+      <div class="bench" id="workbench" aria-label="Монтажная плата квадрокоптера">
+        <svg class="wires-svg" id="wiresSvg" viewBox="0 0 1000 700" preserveAspectRatio="none" aria-hidden="true"></svg>
+      </div>
+      <div class="bench-statusbar">
+        <span id="benchMsg" class="bench-msg">Стол готов. Соберите силовую цепь: жгут АКБ → ESC.</span>
+        <div class="wb-stats"><span>Проводов: <b id="wireCount">0</b></span><span>Ошибок: <b id="errCount">0</b></span><span>Сгорело: <b id="burntCount">0</b></span></div>
+      </div>
+      <div class="wiring-armzone" id="wiringArmZone">
+        <button class="arm-btn big" id="wiringArm">ARM — ПРОВЕРКА ПОСЛЕ СБОРКИ</button>
+      </div>
+    </div>
+
+    <div class="instruments">
+      <div class="card">
+        <h2><span class="h-icon"><svg viewBox="0 0 24 24"><path d="M5 4h14v16H5z"/><path d="M9 9h6M9 13h6M9 17h4"/></svg></span>Карта сборки<span class="ach-count" id="buildDone">0 / 20</span></h2>
+        <div class="journal-track" style="margin-bottom:6px"><div class="journal-fill" id="buildProgress" style="width:0%"></div></div>
+
+        <div class="chk-group">1 · Силовая цепь</div>
+        <div class="check-item" id="chk-vbat"><span class="chk-box"></span><span>Силовой жгут АКБ → ESC (VBAT)</span></div>
+        <div class="check-item" id="chk-esc5v"><span class="chk-box"></span><span>BEC ESC 5В → ПК (5V IN)</span></div>
+        <div class="check-item" id="chk-esgnd"><span class="chk-box"></span><span>ESC GND → ПК (GND)</span></div>
+
+        <div class="chk-group">2 · Моторная ось</div>
+        <div class="check-item" id="chk-pwm1"><span class="chk-box"></span><span>ПК M1 → ESC S1</span></div>
+        <div class="check-item" id="chk-pwm2"><span class="chk-box"></span><span>ПК M2 → ESC S2</span></div>
+        <div class="check-item" id="chk-pwm3"><span class="chk-box"></span><span>ПК M3 → ESC S3</span></div>
+        <div class="check-item" id="chk-pwm4"><span class="chk-box"></span><span>ПК M4 → ESC S4</span></div>
+        <div class="check-item" id="chk-ph1"><span class="chk-box"></span><span>Жгут ESC → мотор M1</span></div>
+        <div class="check-item" id="chk-ph2"><span class="chk-box"></span><span>Жгут ESC → мотор M2</span></div>
+        <div class="check-item" id="chk-ph3"><span class="chk-box"></span><span>Жгут ESC → мотор M3</span></div>
+        <div class="check-item" id="chk-ph4"><span class="chk-box"></span><span>Жгут ESC → мотор M4</span></div>
+
+        <div class="chk-group">3 · Периферия</div>
+        <div class="check-item" id="chk-gpspwr"><span class="chk-box"></span><span>GPS: питание 5В и GND</span></div>
+        <div class="check-item" id="chk-gpstx"><span class="chk-box"></span><span>GPS TX → ПК RX2</span></div>
+        <div class="check-item" id="chk-gpsrx"><span class="chk-box"></span><span>ПК TX2 → GPS RX</span></div>
+        <div class="check-item" id="chk-rxpwr"><span class="chk-box"></span><span>Приёмник R-XSR: питание 5В и GND</span></div>
+        <div class="check-item" id="chk-sbus"><span class="chk-box"></span><span>Приёмник SBUS → ПК SBUS</span></div>
+        <div class="check-item" id="chk-campwr"><span class="chk-box"></span><span>Камера → VTX: питание (5В + GND)</span></div>
+        <div class="check-item" id="chk-camvid"><span class="chk-box"></span><span>Камера VID → VTX VID</span></div>
+        <div class="check-item" id="chk-vtxpwr"><span class="chk-box"></span><span>VTX: питание 5В и GND от ПК</span></div>
+        <div class="check-item" id="chk-buz"><span class="chk-box"></span><span>Пищалка → ПК BUZ</span></div>
+      </div>
+
+      <div class="card">
+        <h2><span class="h-icon"><svg viewBox="0 0 24 24"><path d="M4 7h10M4 12h16M4 17h7"/></svg></span>Монтажный лист</h2>
+        <div class="wire-list" id="wireList"></div>
+        <details class="teacher" style="margin-top:12px">
+          <summary>Порядок настоящего билда</summary>
+          <ol>
+            <li><b>Снаряжение:</b> мультиметр в режиме прозвонки обязателен. АКБ первым делом НЕ подключаем.</li>
+            <li><b>Сначала силовая цепь:</b> АКБ → ESC → BEC 5В → ПК. Тонкие сигналы — потом.</li>
+            <li><b>Прозвонка на КЗ</b> до первого подключения АКБ: Vbat↔GND не должны звониться накоротко.</li>
+            <li><b>Сигналы:</b> M1→S1 … M4→S4, затем жгуты моторов. Направление вращения проверяем без пропеллеров.</li>
+            <li><b>Периферия:</b> GPS и приёмник кроссом TX↔RX, видео камера→VTX, пищалка последней — по ней же ищем коптер на поле.</li>
+            <li>Первый ARM — только без пропеллеров. Дым в мастерской — плохой знак, на поле — допустимо.</li>
+          </ol>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
 </main>
 
 <!-- Печатный «Допуск к полётам» (виден только при печати) -->
@@ -1257,6 +1438,7 @@ canvas#failsafeCanvas{width:100%;height:auto;display:block;border-radius:12px;bo
 <script src="js/builder.js"></script>
 <script src="js/fcsim.js"></script>
 <script src="js/pixhawk.js"></script>
+<script src="js/wiring.js"></script>
 <script src="js/teacher.js"></script>
 </body>
 </html>
