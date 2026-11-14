@@ -341,6 +341,118 @@ canvas#mixCanvas{display:block;margin:0 auto;max-width:100%;height:auto;border:1
 .cli-quick{background:var(--panel3);border:1px solid var(--line2);color:var(--muted);font-family:Consolas,monospace;font-size:11px;border-radius:8px;padding:6px 10px}
 .cli-quick:hover{color:var(--cyan2);border-color:var(--cyan)}
 
+
+/* ============ СИМУЛЯТОР PIXHAWK ============ */
+.phx-wrap{padding:22px}
+.phx-sub{font-size:11px;letter-spacing:.06em;color:var(--muted2);text-transform:none;font-weight:500;margin-left:8px}
+.phx-subtabs{max-width:560px;margin-bottom:18px}
+
+/* мастер настройки */
+.ph-stepper{display:flex;gap:0;margin:4px 0 18px;position:relative}
+.ph-stepper::before{content:"";position:absolute;top:19px;left:6%;right:6%;height:2px;background:var(--line2);z-index:0}
+.ph-stepdot{position:relative;z-index:1;flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;background:transparent;border:none;color:var(--muted)}
+.ph-stepnum{width:38px;height:38px;border-radius:50%;background:var(--panel3);border:2px solid var(--line2);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;color:var(--muted);transition:all .3s}
+.ph-stepname{font-size:10px;letter-spacing:.05em;text-align:center;color:var(--muted2);line-height:1.3}
+.ph-stepok{position:absolute;top:-5px;right:calc(50% - 24px);width:20px;height:20px;border-radius:50%;background:var(--green);color:#052;font-size:11px;font-weight:900;display:none;align-items:center;justify-content:center}
+.ph-stepdot.done .ph-stepnum{background:var(--green);border-color:var(--green);color:#052}
+.ph-stepdot.done .ph-stepok{display:flex}
+.ph-stepdot.done .ph-stepname{color:var(--green)}
+
+.wizard-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:14px;margin-bottom:16px}
+.ph-step{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:16px;position:relative;transition:border-color .3s}
+.ph-step.done{border-color:rgba(47,224,140,.45)}
+.ph-step-head{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.ph-badge{width:30px;height:30px;flex:0 0 auto;border-radius:9px;background:var(--panel3);color:var(--orange2);font-weight:900;display:flex;align-items:center;justify-content:center;font-size:14px}
+.ph-step.done .ph-badge{background:rgba(47,224,140,.15);color:var(--green)}
+.ph-step h3{font-size:13px;letter-spacing:.05em;color:var(--text)}
+.ph-step p{font-size:12px;color:var(--muted);line-height:1.55;margin-bottom:12px}
+.bubble-level{position:relative;width:128px;height:128px;border-radius:50%;margin:2px auto 12px;background:radial-gradient(circle at 50% 50%,#131f3c 0%,#0b1220 78%);border:2px solid var(--line2);box-shadow:inset 0 0 24px rgba(0,0,0,.6)}
+.bubble-ring{position:absolute;left:50%;top:50%;width:44px;height:44px;border-radius:50%;border:1.5px dashed rgba(140,165,210,.4);transform:translate(-50%,-50%)}
+.bubble-cross{position:absolute;left:50%;top:50%;width:110px;height:1.5px;background:rgba(140,165,210,.18);transform:translate(-50%,-50%)}
+.bubble-cross.v{transform:translate(-50%,-50%) rotate(90deg)}
+.bubble-dot{position:absolute;left:50%;top:50%;width:17px;height:17px;border-radius:50%;background:radial-gradient(circle at 38% 38%,#9be7ff,#38d0ff 60%,#1e6fff);box-shadow:0 0 12px rgba(56,208,255,.6);transform:translate(-50%,-50%);transition:transform .12s}
+.phx-holdbtn{
+  width:100%;background:linear-gradient(135deg,#1f2c55,#263563);border:1.5px solid var(--line2);color:var(--cyan2);
+  font-weight:800;letter-spacing:.1em;font-size:12px;border-radius:12px;padding:13px 10px;user-select:none;-webkit-user-select:none;touch-action:none;transition:all .15s
+}
+.phx-holdbtn:active{background:#2a3a66;border-color:var(--cyan)}
+.phx-progress{height:9px;border-radius:5px;background:var(--panel3);overflow:hidden;margin:10px 0}
+.phx-progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--cyan),var(--green));transition:width .1s linear}
+.phx-state{font-size:11.5px;color:var(--muted);min-height:17px;line-height:1.4}
+canvas#gyroNoise{width:100%;height:auto;display:block;border-radius:9px;border:1px solid var(--line);margin-bottom:8px}
+.mag-dial{position:relative;width:110px;height:110px;margin:0 auto 10px;border-radius:50%;border:2px solid var(--line2);background:radial-gradient(circle,#131f3c,#0b1220)}
+.mag-dial::after{content:"N";position:absolute;left:50%;top:4px;transform:translateX(-50%);font-size:11px;color:var(--red);font-weight:800}
+.mag-arrow{position:absolute;left:50%;top:50%;width:8px;height:78px;margin-left:-4px;margin-top:-39px;background:linear-gradient(180deg,#ff8a2a 0 42%,transparent 42%);transform-origin:50% 50%;transition:transform .05s linear;border-radius:4px}
+.mag-arrow::before{content:"";position:absolute;left:50%;top:-6px;transform:translateX(-50%);border:7px solid transparent;border-bottom:13px solid #ff8a2a}
+.rc-row{margin-bottom:10px}
+.rc-head{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:4px}
+.rc-head output{color:var(--cyan2);font-variant-numeric:tabular-nums}
+.rc-span{font-size:9.5px;color:var(--muted2);margin-top:2px;font-variant-numeric:tabular-nums}
+.rc-bar{height:4px;border-radius:2px;background:var(--panel3);overflow:hidden;margin-top:3px}
+.rc-bar-fill{height:100%;background:linear-gradient(90deg,var(--cyan),var(--green));width:0%}
+.done-btn{background:rgba(47,224,140,.15) !important;border-color:var(--green) !important;color:var(--green) !important}
+.phx-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:none;border-radius:11px;font-weight:800;letter-spacing:.06em;font-size:12px;padding:12px 18px;transition:all .15s}
+.phx-btn-primary{background:linear-gradient(135deg,var(--orange),#ff5e3a);color:#201000}
+.phx-btn-primary:disabled{background:var(--panel3);color:var(--muted2);cursor:not-allowed}
+.phx-btn-ghost{background:var(--panel3);border:1px solid var(--line2);color:var(--text)}
+.phx-btn-ghost:disabled{opacity:.45;cursor:not-allowed}
+.safety-banner{display:flex;gap:12px;align-items:center;background:rgba(255,77,94,.12);border:1.5px solid var(--red);color:#ffb3bb;border-radius:12px;padding:10px 12px;font-size:12px;font-weight:700;line-height:1.45;margin-bottom:12px;animation:pulse 1.6s infinite}
+.motor-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.motor-cell{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 8px;text-align:center;transition:all .2s}
+.motor-cell svg{width:64px;height:64px;display:block;margin:0 auto 6px}
+.motor-cell .motor-label{font-size:10.5px;color:var(--muted)}
+.motor-cell.spinning{border-color:var(--cyan);box-shadow:0 0 18px rgba(56,208,255,.18)}
+.motor-ring{stroke:var(--line2);stroke-width:2.4;fill:none;stroke-dasharray:6 9;transition:stroke .2s}
+.motor-cell.spinning .motor-ring{stroke:var(--cyan);animation:dashspin .4s linear infinite}
+.motor-cell.spinning.ccw .motor-ring{animation-direction:reverse;stroke:var(--orange)}
+.motor-cell.spinning{border-color:var(--cyan)}
+.motor-cell.spinning.ccw{border-color:var(--orange)}
+@keyframes dashspin{to{stroke-dashoffset:-60}}
+.motor-test-btn{display:block;width:100%;background:var(--panel3);border:1px solid var(--line2);color:var(--cyan2);border-radius:8px;font-size:11px;font-weight:700;padding:5px 8px;margin-top:6px}
+.motor-test-btn:hover{border-color:var(--cyan);color:#fff}
+.dir-checks{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.dir-check{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--muted);background:var(--panel);border:1px solid var(--line);padding:6px 10px;border-radius:8px;cursor:pointer}
+.dir-check input{accent-color:var(--orange)}
+
+/* параметры */
+.phx-param-toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
+.phx-param-toolbar input[type=text]{flex:1;min-width:170px;background:var(--bg);border:1px solid var(--line2);color:var(--text);border-radius:10px;padding:10px 12px;font-size:13px}
+.phx-param-toolbar input[type=text]:focus{outline:none;border-color:var(--cyan)}
+.phx-param-toolbar select{background:var(--bg);border:1px solid var(--line2);color:var(--text);border-radius:10px;padding:10px 12px;font-size:13px}
+.phx-param-count{font-size:11px;color:var(--muted2);margin-bottom:8px;font-variant-numeric:tabular-nums}
+.ph-param-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:8px;max-height:560px;overflow-y:auto;padding-right:4px}
+.ph-param{background:var(--bg);border:1px solid var(--line);border-radius:11px;padding:9px 12px}
+.ph-param.mod{border-color:rgba(255,176,102,.45)}
+.ph-param-head{display:flex;align-items:center;gap:8px}
+.ph-param code{font-family:Consolas,monospace;font-size:12px;color:var(--cyan2);flex:1}
+.ph-param-val{width:96px;background:var(--panel);border:1px solid var(--line2);color:var(--text);border-radius:8px;padding:6px 8px;font-family:Consolas,monospace;font-size:12px;text-align:right}
+.ph-param-val:focus{outline:none;border-color:var(--cyan)}
+.ph-param-unit{font-size:10px;color:var(--muted2);min-width:34px}
+.ph-param-desc{font-size:10.5px;color:var(--muted);margin-top:5px;line-height:1.45}
+.mod-dot{color:var(--orange)}
+
+/* сценарий failsafe */
+.phx-scene-grid{display:grid;grid-template-columns:1fr 320px;gap:16px;align-items:start}
+@media(max-width:1050px){.phx-scene-grid{grid-template-columns:1fr}}
+canvas#failsafeCanvas{width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--line)}
+.phx-scene-controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.phx-scene-side{display:flex;flex-direction:column;gap:12px}
+.phx-hud{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:14px}
+.phx-hud-row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px;font-size:12px;color:var(--muted)}
+.phx-hud-row:last-child{margin-bottom:0}
+.phx-hud-row b{color:var(--text);font-variant-numeric:tabular-nums}
+.mode-pill{font-family:Consolas,monospace;font-size:12px;font-weight:800;letter-spacing:.06em;padding:5px 13px;border-radius:999px;border:1px solid}
+.mode-pill.disarm{color:var(--muted2);border-color:var(--line2);background:var(--panel2)}
+.mode-pill.mission{color:var(--cyan2);border-color:rgba(56,208,255,.45);background:rgba(56,208,255,.08)}
+.mode-pill.fs-rtl{color:var(--yellow);border-color:rgba(255,210,62,.45);background:rgba(255,210,62,.08)}
+.mode-pill.fs-land{color:#ffb3bb;border-color:rgba(255,77,94,.45);background:rgba(255,77,94,.1)}
+.mode-pill.landed{color:var(--green);border-color:rgba(47,224,140,.45);background:rgba(47,224,140,.09)}
+.phx-batt-track{flex:1;height:12px;border-radius:6px;background:var(--panel3);overflow:hidden}
+.phx-batt-fill{height:100%;width:100%;background:var(--green);transition:width .2s}
+.phx-log{background:#05070f;border:1px solid var(--line);border-radius:12px;min-height:170px;max-height:220px;overflow-y:auto;padding:11px 12px;font-family:Consolas,monospace;font-size:11px;line-height:1.55;color:#8ae4a8;white-space:pre-wrap}
+.phx-note{font-size:12px;color:var(--muted);line-height:1.6;background:var(--bg);border:1px dashed var(--line2);border-radius:12px;padding:12px 14px}
+.phx-note b{color:var(--text)}
+
 /* ============ НАСТАВНИКУ ============ */
 .lab-grid-teacher{display:grid;grid-template-columns:1.05fr 1fr;gap:16px;align-items:start}
 @media(max-width:1100px){.lab-grid-teacher{grid-template-columns:1fr}}
@@ -424,6 +536,7 @@ canvas#mixCanvas{display:block;margin:0 auto;max-width:100%;height:auto;border:1
       <button class="nav-btn" data-tab="prop" role="tab"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="1.6"/><path d="M12 10.4C12 6 13.5 3 16 2.6 17 6 15.4 9 12 10.4ZM12 13.6C12 18 10.5 21 8 21.4 7 18 8.6 15 12 13.6ZM10.4 12C6 12 3 10.5 2.6 8 6 7 9 8.6 10.4 12ZM13.6 12C18 12 21 13.5 21.4 16 18 17 15 15.4 13.6 12Z"/></svg>Воздушный винт</button>
       <button class="nav-btn" data-tab="builder" role="tab"><svg viewBox="0 0 24 24"><path d="M14.5 6.5 17 4l3 3-2.5 2.5M14.5 6.5 4 17l3 3L17.5 9.5M14.5 6.5l3 3"/></svg>Конструктор БПЛА</button>
       <button class="nav-btn" data-tab="fcsim" role="tab"><svg viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="2"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></svg>Симулятор ПК</button>
+      <button class="nav-btn" data-tab="pixhawk" role="tab"><svg viewBox="0 0 24 24"><path d="M12 2 22 12 12 22 2 12Z"/><path d="M12 7v5l3 2"/></svg>Симулятор Pixhawk</button>
       <button class="nav-btn" data-tab="quiz" role="tab"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.4 9.2a2.7 2.7 0 0 1 5.3.9c0 1.8-2.6 2.1-2.6 3.6"/><path d="M12 16.8h.01"/></svg>Квиз «Аэро-Эрудит»</button>
       <button class="nav-btn" data-tab="formulas" role="tab"><svg viewBox="0 0 24 24"><path d="M5 19 10 5l2.5 8L15 9h4"/><path d="M5 11h3"/></svg>Формулы и методичка</button>
       <button class="nav-btn" data-tab="teacher" role="tab"><svg viewBox="0 0 24 24"><path d="M12 4 2 9l10 5 10-5-10-5z"/><path d="M6 11v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/><path d="M22 9v6"/></svg>Наставнику</button>
@@ -957,6 +1070,152 @@ canvas#mixCanvas{display:block;margin:0 auto;max-width:100%;height:auto;border:1
   </div>
 </section>
 
+
+<!-- ══════════ МОДУЛЬ: СИМУЛЯТОР PIXHAWK ══════════ -->
+<section class="tab-page" id="page-pixhawk" role="tabpanel">
+  <div class="card phx-wrap">
+    <h2><span class="h-icon"><svg viewBox="0 0 24 24"><path d="M12 2 22 12 12 22 2 12Z"/><path d="M12 7v5l3 2"/></svg></span>Симулятор Pixhawk<span class="phx-sub">ArduPilot · учебный полётный контроллер · сначала настрой — потом лети</span></h2>
+
+    <div class="segmented fc-subtabs phx-subtabs" role="tablist">
+      <button class="fc-subtab active" data-phx="wizard">Мастер настройки</button>
+      <button class="fc-subtab" data-phx="params">Параметры</button>
+      <button class="fc-subtab" data-phx="failsafe">Сценарии failsafe</button>
+    </div>
+
+    <!-- ПАНЕЛЬ 1 · МАСТЕР НАСТРОЙКИ -->
+    <div class="fc-panel active" id="phxPanel-wizard">
+      <div class="ph-stepper" aria-label="Шаги мастера настройки">
+        <div class="ph-stepdot" data-step="1"><span class="ph-stepnum">1</span><span class="ph-stepname">Акселерометр</span><span class="ph-stepok">✓</span></div>
+        <div class="ph-stepdot" data-step="2"><span class="ph-stepnum">2</span><span class="ph-stepname">Гироскоп</span><span class="ph-stepok">✓</span></div>
+        <div class="ph-stepdot" data-step="3"><span class="ph-stepnum">3</span><span class="ph-stepname">Магнитометр</span><span class="ph-stepok">✓</span></div>
+        <div class="ph-stepdot" data-step="4"><span class="ph-stepnum">4</span><span class="ph-stepname">Радио</span><span class="ph-stepok">✓</span></div>
+        <div class="ph-stepdot" data-step="5"><span class="ph-stepnum">5</span><span class="ph-stepname">Двигатели</span><span class="ph-stepok">✓</span></div>
+      </div>
+
+      <div class="wizard-grid">
+        <div class="ph-step" id="phxStep1">
+          <div class="ph-step-head"><span class="ph-badge" id="phxBadge1">1</span><h3>Калибровка акселерометра</h3></div>
+          <p>Поставьте коптер <b>на ровную поверхность</b> и кнопками выровняйте «пузырёк» строго в центр (±1° по обеим осям).</p>
+          <div class="bubble-level"><div class="bubble-cross"></div><div class="bubble-cross v"></div><div class="bubble-ring"></div><div class="bubble-dot" id="bubbleDot"></div></div>
+          <div class="control-block" style="margin-bottom:8px">
+            <div class="control-label"><span>Наклон по тангажу</span><output id="accPitchOut">0.0°</output></div>
+            <input type="range" id="accPitch" min="-15" max="15" step="0.5" value="4">
+          </div>
+          <div class="control-block" style="margin-bottom:10px">
+            <div class="control-label"><span>Наклон по крену</span><output id="accRollOut">0.0°</output></div>
+            <input type="range" id="accRoll" min="-15" max="15" step="0.5" value="-3">
+          </div>
+          <div class="phx-state" id="bubbleState" style="margin-bottom:10px">Коптер наклонён — выровняйте стол/коптер</div>
+          <button class="phx-btn phx-btn-primary" id="accCalibrate" style="width:100%" disabled>Откалибровать (ждём «ровно»)</button>
+        </div>
+
+        <div class="ph-step" id="phxStep2">
+          <div class="ph-step-head"><span class="ph-badge" id="phxBadge2">2</span><h3>Калибровка гироскопа</h3></div>
+          <p>Гироскоп учится отличать «стою» от «лечу». <b>Удерживайте кнопку 3 секунды</b> и не трогайте коптер.</p>
+          <canvas id="gyroNoise" width="262" height="84" aria-label="Шум гироскопа"></canvas>
+          <button class="phx-holdbtn" id="gyroHold">УДЕРЖИВАЙТЕ 3 С · НЕ ДВИГАТЬ</button>
+          <div class="phx-progress"><div class="phx-progress-fill" id="gyroBar"></div></div>
+          <div class="phx-state" id="gyroState">Нажмите и удерживайте — график шума затихнет</div>
+        </div>
+
+        <div class="ph-step" id="phxStep3">
+          <div class="ph-step-head"><span class="ph-badge" id="phxBadge3">3</span><h3>Калибровка магнитометра</h3></div>
+          <p>Компасу нужно «понюхать» поле во все стороны: <b>медленно вращайте коптер, удерживая кнопку</b>, минимум на два полных оборота.</p>
+          <div class="mag-dial"><div class="mag-arrow" id="magArrow"></div></div>
+          <button class="phx-holdbtn" id="magRotate">ВРАЩАТЬ КОПТЕР (УДЕРЖИВАТЬ)</button>
+          <div class="phx-progress"><div class="phx-progress-fill" id="magBar"></div></div>
+          <div class="phx-state" id="magState">0° / 720°</div>
+        </div>
+
+        <div class="ph-step" id="phxStep4">
+          <div class="ph-step-head"><span class="ph-badge" id="phxBadge4">4</span><h3>Калибровка радио</h3></div>
+          <p>Прогоните <b>каждый стик из упора в упор</b> — стенд сам зафиксирует MIN и MAX по каналам.</p>
+          <div class="rc-row"><div class="rc-head"><span>Канал 1 · Roll</span><output id="phx_rc1_val">0</output></div><input type="range" id="phx_rc1" min="-100" max="100" step="1" value="0"><div class="rc-span" id="phx_rc1_span">размах 0 / 180</div><div class="rc-bar"><div class="rc-bar-fill" id="phx_rc1_bar"></div></div></div>
+          <div class="rc-row"><div class="rc-head"><span>Канал 2 · Pitch</span><output id="phx_rc2_val">0</output></div><input type="range" id="phx_rc2" min="-100" max="100" step="1" value="0"><div class="rc-span" id="phx_rc2_span">размах 0 / 180</div><div class="rc-bar"><div class="rc-bar-fill" id="phx_rc2_bar"></div></div></div>
+          <div class="rc-row"><div class="rc-head"><span>Канал 3 · Throttle</span><output id="phx_rc3_val">0</output></div><input type="range" id="phx_rc3" min="-100" max="100" step="1" value="0"><div class="rc-span" id="phx_rc3_span">размах 0 / 180</div><div class="rc-bar"><div class="rc-bar-fill" id="phx_rc3_bar"></div></div></div>
+          <div class="rc-row" style="margin-bottom:12px"><div class="rc-head"><span>Канал 4 · Yaw</span><output id="phx_rc4_val">0</output></div><input type="range" id="phx_rc4" min="-100" max="100" step="1" value="0"><div class="rc-span" id="phx_rc4_span">размах 0 / 180</div><div class="rc-bar"><div class="rc-bar-fill" id="phx_rc4_bar"></div></div></div>
+          <div class="phx-state" id="rcState" style="margin-bottom:10px">Прогоните каждый стик из упора в упор</div>
+          <button class="phx-btn phx-btn-primary" id="rcCapture" style="width:100%" disabled>Захватить MIN / MAX / TRIM</button>
+        </div>
+
+        <div class="ph-step" id="phxStep5">
+          <div class="ph-step-head"><span class="ph-badge" id="phxBadge5">5</span><h3>Тест двигателей</h3></div>
+          <div class="safety-banner"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17h.01"/></svg><span>ПРОПЕЛЛЕРЫ СНЯТЫ! Винт на тесте — это палец в мясорубке.</span></div>
+          <div class="arm-zone" style="margin-bottom:10px;padding:10px">
+            <span class="arm-lamp" id="phxArmLamp"></span>
+            <button class="arm-btn" id="phxArm" style="padding:11px 22px;font-size:12px">ARM (пропы сняты!)</button>
+            <span class="arm-text" id="phxArmText">Моторы заблокированы</span>
+          </div>
+          <div class="motor-grid">
+            <div class="motor-cell" id="cell_m1"><svg viewBox="0 0 64 64"><circle class="motor-ring" cx="32" cy="32" r="21"/><circle cx="32" cy="32" r="8.5" fill="#182449" stroke="#8fa3c0" stroke-width="1.5"/></svg><div class="motor-label">M1 · ПП · CW</div><button class="motor-test-btn" data-motor="m1">Крутить 2,5 с</button></div>
+            <div class="motor-cell ccw" id="cell_m2"><svg viewBox="0 0 64 64"><circle class="motor-ring" cx="32" cy="32" r="21"/><circle cx="32" cy="32" r="8.5" fill="#182449" stroke="#8fa3c0" stroke-width="1.5"/></svg><div class="motor-label">M2 · ЗП · CCW</div><button class="motor-test-btn" data-motor="m2">Крутить 2,5 с</button></div>
+            <div class="motor-cell" id="cell_m3"><svg viewBox="0 0 64 64"><circle class="motor-ring" cx="32" cy="32" r="21"/><circle cx="32" cy="32" r="8.5" fill="#182449" stroke="#8fa3c0" stroke-width="1.5"/></svg><div class="motor-label">M3 · ЗЛ · CW</div><button class="motor-test-btn" data-motor="m3">Крутить 2,5 с</button></div>
+            <div class="motor-cell ccw" id="cell_m4"><svg viewBox="0 0 64 64"><circle class="motor-ring" cx="32" cy="32" r="21"/><circle cx="32" cy="32" r="8.5" fill="#182449" stroke="#8fa3c0" stroke-width="1.5"/></svg><div class="motor-label">M4 · ПЛ · CCW</div><button class="motor-test-btn" data-motor="m4">Крутить 2,5 с</button></div>
+          </div>
+          <div class="dir-checks">
+            <label class="dir-check"><input type="checkbox" class="dir-check" data-motor="m1">M1 по часовой</label>
+            <label class="dir-check"><input type="checkbox" class="dir-check" data-motor="m2">M2 против часовой</label>
+            <label class="dir-check"><input type="checkbox" class="dir-check" data-motor="m3">M3 по часовой</label>
+            <label class="dir-check"><input type="checkbox" class="dir-check" data-motor="m4">M4 против часовой</label>
+          </div>
+          <div class="phx-state" id="motorState" style="margin-bottom:10px">Снимите пропеллеры → ARM → покрутите каждый мотор → отметьте направление</div>
+          <button class="phx-btn phx-btn-primary" id="motorConfirm" style="width:100%" disabled>Подтвердить направления</button>
+        </div>
+      </div>
+
+      <div class="build-verdict bad" id="phxVerdict"><span>НАСТРОЙКА НЕ ЗАВЕРШЕНА: 0/5 шагов</span></div>
+    </div>
+
+    <!-- ПАНЕЛЬ 2 · ПАРАМЕТРЫ -->
+    <div class="fc-panel" id="phxPanel-params">
+      <div class="phx-param-toolbar">
+        <input type="text" id="phxParamSearch" placeholder="Поиск параметра (например, ATC_RAT_RLL_P)…" aria-label="Поиск параметра">
+        <select id="phxParamCat" aria-label="Категория">
+          <option value="all">Все категории</option>
+          <option value="frame">Рама и планировщик</option>
+          <option value="stab">Стабилизация (PID)</option>
+          <option value="motor">Моторы</option>
+          <option value="radio">Радио</option>
+          <option value="safe">Безопасность / failsafe</option>
+          <option value="nav">Навигация и RTL</option>
+        </select>
+        <button class="phx-btn phx-btn-ghost" id="phxParamCopy">Копировать как CLI</button>
+        <button class="phx-btn phx-btn-ghost" id="phxParamDownload">Скачать params.param</button>
+        <button class="phx-btn phx-btn-ghost" id="phxParamReset">Сбросить к заводским</button>
+      </div>
+      <div class="phx-param-count" id="phxParamCount">Показано: 0 из 0</div>
+      <div class="ph-param-list" id="phxParamList"></div>
+      <p class="card-note" style="margin-top:12px">Учебная копия параметров ArduPilot 4.x. Изменения живут только на этой странице; «Скачать» выгрузит честный <code>params.param</code> — его можно импортировать в настоящий Pixhawk через Mission Planner (Config → Full Parameter List → Load from file).</p>
+    </div>
+
+    <!-- ПАНЕЛЬ 3 · СЦЕНАРИИ FAILSAFE -->
+    <div class="fc-panel" id="phxPanel-failsafe">
+      <div class="phx-scene-grid">
+        <div>
+          <canvas id="failsafeCanvas" width="640" height="420" aria-label="Поле с миссией и возвратом домой"></canvas>
+          <div class="phx-scene-controls">
+            <button class="phx-btn phx-btn-primary" id="phxStartMission">▶ Старт миссии</button>
+            <button class="phx-btn phx-btn-ghost" id="phxLinkLoss">Потеря связи → RTL</button>
+            <button class="phx-btn phx-btn-ghost" id="phxBattLow">Просадка батареи (19%)</button>
+            <button class="phx-btn phx-btn-ghost" id="phxSceneReset">Сброс</button>
+          </div>
+        </div>
+        <div class="phx-scene-side">
+          <div class="phx-hud">
+            <div class="phx-hud-row"><span>Режим</span><span class="mode-pill disarm" id="phxMode">DISARM</span></div>
+            <div class="phx-hud-row"><span>Батарея</span><div class="phx-batt-track"><div class="phx-batt-fill" id="phxBatt"></div></div></div>
+            <div class="phx-hud-row"><span>Высота</span><b id="phxAlt">0.0 м</b></div>
+            <div class="phx-hud-row"><span>До дома</span><b id="phxDist">0 м</b></div>
+          </div>
+          <pre class="phx-log" id="phxSceneLog" aria-live="polite"></pre>
+          <div class="phx-note"><b>Что делает failsafe в ArduPilot.</b><br>FS_GCS_ENABLE = 1: потерял телеметрию → <b>RTL</b> (подъём на RTL_ALT и домой).<br>FS_BATT_VOLTAGE: просело питание → принудительная посадка.<br>FS_THR_ENABLE: замирал газ → RTL или Land. Всё это отрабатывает сам полётник — пилоту остаётся только не мешать.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 </main>
 
 <!-- Печатный «Допуск к полётам» (виден только при печати) -->
@@ -997,6 +1256,7 @@ canvas#mixCanvas{display:block;margin:0 auto;max-width:100%;height:auto;border:1
 <script src="js/quiz.js"></script>
 <script src="js/builder.js"></script>
 <script src="js/fcsim.js"></script>
+<script src="js/pixhawk.js"></script>
 <script src="js/teacher.js"></script>
 </body>
 </html>

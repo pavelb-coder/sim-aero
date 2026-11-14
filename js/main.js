@@ -47,6 +47,7 @@ window.AeroLab = (function () {
     { id: 'prop_master',   name: 'Винтомоторник',   desc: 'Задача: винт для коптера 1,2 кг' },
     { id: 'builder_ok',    name: 'Сборщик',         desc: 'Собрали БПЛА без ошибок совместимости' },
     { id: 'pid_zone',      name: 'PID-шепотун',     desc: 'Поймали зелёный отклик в PID-бенче' },
+    { id: 'pixhawk_ok',    name: 'Настройщик Pixhawk', desc: 'Прошли мастер настройки Pixhawk (5 шагов)' },
     { id: 'quiz_ace',      name: 'Аэро-Эрудит',     desc: 'Квиз: не менее 10 из 12' },
     { id: 'clearance',     name: 'Допуск к полётам', desc: 'Открыли все остальные достижения' }
   ];
