@@ -1,15 +1,15 @@
 {
   "name": "aerolab-server",
-  "version": "1.0.0",
-  "description": "АэроЛаб (Аэроквантум): статический авиатренажёр — запуск на Node.js без зависимостей",
+  "version": "1.1.0",
+  "description": "АэроЛаб (Аэроквантум): интерактивная авиалаборатория — локальный запуск на Node.js без зависимостей",
   "main": "server.js",
   "private": true,
   "scripts": {
     "start": "node server.js",
-    "serve": "node server.js"
+    "start:open": "node server.js --open"
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=18.0.0"
   },
   "license": "MIT"
 }
