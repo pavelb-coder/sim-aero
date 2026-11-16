@@ -13,20 +13,39 @@
 
 ## 💻 Запуск локально (порт 8085)
 
-Нужен только Python 3 (на Windows обычно ставится с python.org, на Ubuntu — уже есть).
+Подойдут **Python 3** (уже есть на Ubuntu, на Windows ставится с python.org) или **Node.js ≥ 14** (без npm-зависимостей).
 
-**Windows** — двойной щелчок по `run-windows.bat`
-(или в командной строке: `python -m http.server 8085 --bind 0.0.0.0`)
+**Windows** — двойной щелчок по `run-windows.bat` (Python) или `run-node.bat` (Node.js)
 
 **Ubuntu / Linux**:
 
 ```bash
-./run-ubuntu.sh
+./run-ubuntu.sh   # Python 3
+./run-node.sh     # Node.js
 # или вручную:
 python3 -m http.server 8085 --bind 0.0.0.0
+node server.js        # то же самое: npm start
 ```
 
 Затем откройте **http://localhost:8085**
+
+### Node-сервер: переменные окружения
+
+`node server.js` отдаёт статику из корня репозитория и ничего не требует, кроме Node.js:
+
+| Переменная | По умолчанию | Назначение |
+|---|---|---|
+| `PORT` | `8085` | порт (можно и аргументом: `node server.js 8090`) |
+| `HOST` | `0.0.0.0` | адрес привязки |
+| `FRAME_ANCESTORS` | `*` | кто может встраивать сайт во iframe (CSP `frame-ancestors`) |
+
+Пример для школы с Moodle на своём домене:
+
+```bash
+FRAME_ANCESTORS="https://moodle.school.ru 'self'" node server.js
+```
+
+Сервер также отдаёт корректные MIME-типы и UTF-8, сжимает текстовые файлы gzip, закрывает path traversal и ставит `nosniff` / `Referrer-Policy`.
 
 ## Модули
 
@@ -54,8 +73,12 @@ js/fcsim.js       — симулятор полётного контроллер
 js/pixhawk.js     — симулятор Pixhawk (мастер настройки, параметры, failsafe)
 js/wiring.js      — симулятор сборки квадрокоптера (монтажный стол, чек-лист, ARM)
 js/teacher.js     — раздел наставника (журнал, достижения, печать допуска)
-run-windows.bat   — запуск на Windows (порт 8085)
-run-ubuntu.sh     — запуск на Ubuntu/Linux (порт 8085)
+run-windows.bat   — запуск на Windows через Python (порт 8085)
+run-ubuntu.sh     — запуск на Ubuntu/Linux через Python (порт 8085)
+run-node.bat      — запуск на Windows через Node.js
+run-node.sh       — запуск на Ubuntu/Linux через Node.js
+server.js         — статический сервер на чистом Node.js (без зависимостей)
+package.json      — npm-скрипты (npm start) и engines
 ```
 
 Симуляция коэффициентов — учебная (упрощённая). Для точных расчётов используйте продувку.
