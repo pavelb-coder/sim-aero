@@ -151,14 +151,39 @@ function statSafe(filePath) {
   }
 }
 
-server.listen(PORT, HOST, () => {
+const MAX_PORT_SHIFT = 10;
+let currentPort = PORT;
+
+function announce(port) {
   console.log('════════════════════════════════════════');
   console.log('  АэроЛаб · Node server');
-  console.log(`  http://${HOST}:${PORT}   (корень: ${ROOT})`);
+  console.log(`  http://localhost:${port}   (сеть: http://${HOST}:${port})`);
+  console.log(`  корень: ${ROOT}`);
   console.log(`  Ctrl+C останавливает стенд`);
   console.log(`  iframe: frame-ancestors ${FRAME_ANCESTORS}`);
   console.log('════════════════════════════════════════');
-});
+}
+
+function listen(port, shift) {
+  currentPort = port;
+  // Снимаем возможные хвосты прошлых попыток: 'listening' срабатывает один раз
+  // при фактическом бинде, поэтому баннер обязан показывать реальный порт.
+  server.removeAllListeners('error');
+  server.removeAllListeners('listening');
+  server.once('error', (err) => {
+    if (err && err.code === 'EADDRINUSE' && shift < MAX_PORT_SHIFT) {
+      console.log(`[aerolab] Порт ${port} занят — пробую ${port + 1}…`);
+      listen(port + 1, shift + 1);
+      return;
+    }
+    console.error(`[aerolab] Не удалось занять порт ${port}: ${err && err.message}`);
+    process.exit(1);
+  });
+  server.once('listening', () => announce(port));
+  server.listen(port, HOST);
+}
+
+listen(PORT, 0);
 
 process.on('SIGINT', () => server.close(() => process.exit(0)));
 process.on('SIGTERM', () => server.close(() => process.exit(0)));
