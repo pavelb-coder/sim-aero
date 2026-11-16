@@ -13,41 +13,38 @@
 
 ## 💻 Запуск локально (порт 8085)
 
-Подойдут **Python 3** (уже есть на Ubuntu, на Windows ставится с python.org) или **Node.js ≥ 14** (без npm-зависимостей).
+Подойдут **Node.js ≥ 18** (без npm-зависимостей, как в ХимЛаб 3D) или **Python 3** (уже есть на Ubuntu, на Windows ставится с python.org). Порт всегда **8085**.
 
-**Windows** (достаточно двойного щелчка по файлу в папке проекта):
+**Windows** (двойной щелчок по файлу в папке проекта):
 
 | Файл | Что делает |
 |---|---|
-| `run-windows.bat` | Универсальный запуск: сам подхватит Node.js, иначе Python 3 (рекомендуется) |
-| `run-windows.ps1` | То же на PowerShell 5.1+ (ищет свободный порт, открывает браузер) |
-| `run-node.bat` | Строго Node.js (если Node нет — мягко уходит в Python) |
+| `start-windows.bat` | Универсальный запуск: подхватит Node.js, иначе Python 3; браузер откроется сам (рекомендуется) |
+| `start-windows.ps1` | То же на PowerShell 5.1+ (ищет свободный порт, открывает браузер) |
 
-Если порт 8085 занят, Node-сервер сам возьмёт следующий свободный (8086…8095); то же делает и `run-windows.ps1`. Логику можно изменить переменной `PORT` (`set PORT=8090 && run-windows.bat` или `$env:PORT=8090; .\run-windows.ps1`).
+Если порт 8085 занят, Node-сервер сам возьмёт следующий свободный (8086…8095); то же делает и `start-windows.ps1`. Порт меняется переменной `PORT` (`set PORT=8090 && start-windows.bat` или `$env:PORT=8090; .\start-windows.ps1`).
 
-Установка, если попросит: **Node.js LTS** — https://nodejs.org/ · **Python 3.9+** — https://www.python.org/downloads/ (в установщике отметьте «Add python.exe to PATH»).
+Установка, если попросит: **Node.js LTS** — https://nodejs.org/ (или `winget install OpenJS.NodeJS.LTS`) · **Python 3.9+** — https://www.python.org/downloads/ (в установщике отметьте «Add python.exe to PATH»).
 
 Полезно в мастерской: при первом запуске Windows может показать предупреждение брандмауэра — разрешите для частных сетей, если стенд будут открывать с других компьютеров класса (адрес покажет сам сервер, он слушает `0.0.0.0`).
 
-Сценарий PowerShell, если политика исполнения не даёт запустить: `powershell -ExecutionPolicy Bypass -File .\run-windows.ps1` (или щелчок правой кнопкой → «Выполнить с помощью PowerShell»).
-
-Вручную: `node server.js` · `py -3 -m http.server 8085 --bind 0.0.0.0`
+Сценарий PowerShell, если политика исполнения не даёт запустить: `powershell -ExecutionPolicy Bypass -File .\start-windows.ps1` (или правый клик → «Выполнить с помощью PowerShell»).
 
 **Ubuntu / Linux**:
 
 ```bash
-./run-ubuntu.sh   # Python 3
-./run-node.sh     # Node.js
+./start-ubuntu.sh   # Node.js (если нет — встроенный Python 3)
 # или вручную:
+node server.js          # npm start
+node server.js --open   # то же + открыть браузер (npm run start:open)
 python3 -m http.server 8085 --bind 0.0.0.0
-node server.js        # то же самое: npm start
 ```
 
 Затем откройте **http://localhost:8085**
 
 ### Node-сервер: переменные окружения
 
-`node server.js` отдаёт статику из корня репозитория и ничего не требует, кроме Node.js:
+`node server.js [--open]` отдаёт статику из корня репозитория и ничего не требует, кроме Node.js: Brotli/gzip для текстовых файлов, `no-cache` для разметки и скриптов, сутки кэша для картинок/шрифтов, автоперебор порта при занятом 8085.
 
 | Переменная | По умолчанию | Назначение |
 |---|---|---|
@@ -89,13 +86,11 @@ js/fcsim.js       — симулятор полётного контроллер
 js/pixhawk.js     — симулятор Pixhawk (мастер настройки, параметры, failsafe)
 js/wiring.js      — симулятор сборки квадрокоптера (монтажный стол, чек-лист, ARM)
 js/teacher.js     — раздел наставника (журнал, достижения, печать допуска)
-run-windows.bat   — запуск на Windows через Python (порт 8085)
-run-ubuntu.sh     — запуск на Ubuntu/Linux через Python (порт 8085)
-run-node.bat      — запуск на Windows через Node.js
-run-windows.ps1   — запуск на Windows через PowerShell (с поиском свободного порта)
-run-node.sh       — запуск на Ubuntu/Linux через Node.js
-server.js         — статический сервер на чистом Node.js (без зависимостей)
-package.json      — npm-скрипты (npm start) и engines
+start-windows.bat — запуск на Windows (Node.js → Python 3), браузер сам
+start-ubuntu.sh   — запуск на Ubuntu/Linux (то же), браузер сам
+start-windows.ps1 — то же на PowerShell 5.1+ (с поиском свободного порта)
+server.js         — статический сервер на чистом Node.js (без зависимостей, v1.1.0)
+package.json      — npm-скрипты start / start:open, engines node >= 18
 ```
 
 Симуляция коэффициентов — учебная (упрощённая). Для точных расчётов используйте продувку.

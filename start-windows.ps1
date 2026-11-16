@@ -25,7 +25,7 @@ $basePort = $Port
 while (-not (Test-PortFree $Port)) {
   $Port++
   if ($Port -gt ($basePort + 10)) {
-    Write-Host "Порты $basePort..$Port заняты — закройте другой АэроЛаб или задайте PORT=8090" -ForegroundColor Red
+    Write-Host "Порты $basePort..$Port заняты — закройте другой АэроЛаб или задайте PORT=8096" -ForegroundColor Red
     exit 1
   }
 }
