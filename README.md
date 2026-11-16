@@ -15,7 +15,23 @@
 
 Подойдут **Python 3** (уже есть на Ubuntu, на Windows ставится с python.org) или **Node.js ≥ 14** (без npm-зависимостей).
 
-**Windows** — двойной щелчок по `run-windows.bat` (Python) или `run-node.bat` (Node.js)
+**Windows** (достаточно двойного щелчка по файлу в папке проекта):
+
+| Файл | Что делает |
+|---|---|
+| `run-windows.bat` | Универсальный запуск: сам подхватит Node.js, иначе Python 3 (рекомендуется) |
+| `run-windows.ps1` | То же на PowerShell 5.1+ (ищет свободный порт, открывает браузер) |
+| `run-node.bat` | Строго Node.js (если Node нет — мягко уходит в Python) |
+
+Если порт 8085 занят, Node-сервер сам возьмёт следующий свободный (8086…8095); то же делает и `run-windows.ps1`. Логику можно изменить переменной `PORT` (`set PORT=8090 && run-windows.bat` или `$env:PORT=8090; .\run-windows.ps1`).
+
+Установка, если попросит: **Node.js LTS** — https://nodejs.org/ · **Python 3.9+** — https://www.python.org/downloads/ (в установщике отметьте «Add python.exe to PATH»).
+
+Полезно в мастерской: при первом запуске Windows может показать предупреждение брандмауэра — разрешите для частных сетей, если стенд будут открывать с других компьютеров класса (адрес покажет сам сервер, он слушает `0.0.0.0`).
+
+Сценарий PowerShell, если политика исполнения не даёт запустить: `powershell -ExecutionPolicy Bypass -File .\run-windows.ps1` (или щелчок правой кнопкой → «Выполнить с помощью PowerShell»).
+
+Вручную: `node server.js` · `py -3 -m http.server 8085 --bind 0.0.0.0`
 
 **Ubuntu / Linux**:
 
@@ -76,6 +92,7 @@ js/teacher.js     — раздел наставника (журнал, дост�
 run-windows.bat   — запуск на Windows через Python (порт 8085)
 run-ubuntu.sh     — запуск на Ubuntu/Linux через Python (порт 8085)
 run-node.bat      — запуск на Windows через Node.js
+run-windows.ps1   — запуск на Windows через PowerShell (с поиском свободного порта)
 run-node.sh       — запуск на Ubuntu/Linux через Node.js
 server.js         — статический сервер на чистом Node.js (без зависимостей)
 package.json      — npm-скрипты (npm start) и engines
