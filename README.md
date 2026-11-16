@@ -24,7 +24,9 @@
 
 Если порт 8085 занят, Node-сервер сам возьмёт следующий свободный (8086…8095); то же делает и `start-windows.ps1`. Порт меняется переменной `PORT` (`set PORT=8090 && start-windows.bat` или `$env:PORT=8090; .\start-windows.ps1`).
 
-Установка, если попросит: **Node.js LTS** — https://nodejs.org/ (или `winget install OpenJS.NodeJS.LTS`) · **Python 3.9+** — https://www.python.org/downloads/ (в установщике отметьте «Add python.exe to PATH»).
+**Ничего сам не ставит без спроса:** если на компьютере нет ни Node.js, ни Python 3, скрипт сам предложит поставить **Node.js LTS через встроенный `winget`** (Windows 10/11) — ответьте «Y», и стенд поднимется сам. Иначе установите вручную: **Node.js LTS** — https://nodejs.org/ (`winget install OpenJS.NodeJS.LTS`) · **Python 3.9+** — https://www.python.org/downloads/ (отметьте «Add python.exe to PATH»).
+
+**Если при вводе `python` открывается Microsoft Store** — это «заглушка» Windows, а не настоящий Python: либо закройте магазин и пользуйтесь `start-windows.bat` (он предложит поставить Node), либо поставьте Python с python.org, либо в «Параметры → Приложения → Дополнительные параметры приложений → Псевдонимы выполнения приложений» отключите пункты `python.exe` / `python3.exe`.
 
 Полезно в мастерской: при первом запуске Windows может показать предупреждение брандмауэра — разрешите для частных сетей, если стенд будут открывать с других компьютеров класса (адрес покажет сам сервер, он слушает `0.0.0.0`).
 
